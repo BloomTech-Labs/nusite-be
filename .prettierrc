@@ -1,5 +1,5 @@
 {
-	"jsxSingleQuote": true,
-	"semi": true,
-	"singleQuote": true
+  "jsxSingleQuote": false,
+  "semi": true,
+  "singleQuote": false
 }
