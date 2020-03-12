@@ -1,5 +1,10 @@
 {
   "jsxSingleQuote": false,
+  "trailingComma": "es5",
+  "useTabs": false,
+  "quoteProps": "consistent",
   "semi": true,
-  "singleQuote": false
+  "singleQuote": false,
+  "tabWidth": 2,
+  "endOfLine": "lf"
 }
