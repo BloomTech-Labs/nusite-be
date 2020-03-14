@@ -12,7 +12,17 @@
 		"migrate:prod": "cross-env NODE_ENV=production knex migrate:latest",
 		"rollback:prod": "cross-env NODE_ENV=production knex migrate:rollback",
 		"seed": "knex seed:run",
-		"seed:prod": "cross-env NODE_ENV=production knex seed:run"
+		"seed:prod": "cross-env NODE_ENV=production knex seed:run",
+		"test": "jest --detectOpenHandles --forceExit",
+    	"coverage": "jest --coverage --detectOpenHandles --forceExit || true"
+	},
+	"jest": {
+		"collectCoverageFrom": [
+		  "**/*.{js, ts}",
+		  "!**/node_modules/**",
+		  "!**/vendor/**",
+		  "!**/__tests__/**"
+		]
 	},
 	"repository": {
 		"type": "git",
