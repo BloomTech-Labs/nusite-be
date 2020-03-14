@@ -1,6 +1,5 @@
 import * as Knex from "knex";
 
-
 export async function up(knex: Knex): Promise<any> {
   await knex.schema.createTable("projects", table => {
     table.increments("id");
@@ -8,8 +7,7 @@ export async function up(knex: Knex): Promise<any> {
       .string("project_name", 255)
       .notNullable()
       .unique();
-    table
-      .string("project_avatar", 255);
+    table.string("project_avatar", 255);
     table
       .integer("project_owner")
       .notNullable()
@@ -24,18 +22,11 @@ export async function up(knex: Knex): Promise<any> {
       .onDelete("CASCADE")
       .onUpdate("CASCADE")
       .unsigned();
-    table
-      .boolean("completed")
-      .defaultTo(false);
-    table
-      .boolean("marketplace")
-      .defaultTo(false);
-    table
-      .boolean("showcase")
-      .defaultTo(false);
-  })
+    table.boolean("completed").defaultTo(false);
+    table.boolean("marketplace").defaultTo(false);
+    table.boolean("showcase").defaultTo(false);
+  });
 }
-
 
 export async function down(knex: Knex): Promise<any> {
   await knex.schema.dropTableIfExists("projects");
