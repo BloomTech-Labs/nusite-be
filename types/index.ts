@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   type Query {
@@ -39,7 +39,13 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    signup(username: String!, first_name: String!, last_name: String!, password: String!, email: String!): AuthPayload
+    signup(
+      username: String!
+      first_name: String!
+      last_name: String!
+      password: String!
+      email: String!
+    ): AuthPayload
     login(email: String!, password: String!): AuthPayload
     # adding a project
     # claiming a project/job
@@ -49,6 +55,6 @@ const typeDefs = gql`
     # archive users
     # delete projects
   }
-`
+`;
 
 export default typeDefs;
