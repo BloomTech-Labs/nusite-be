@@ -1,4 +1,4 @@
-import db from '../data/dbconfig';
+import db from "../data/dbconfig";
 
 class Model {
   tablename: string;
@@ -7,7 +7,7 @@ class Model {
   }
 
   find() {
-    return db(this.tablename)
+    return db(this.tablename);
   }
 
   findBy(filter: any) {
@@ -19,28 +19,28 @@ class Model {
   findById(id: number) {
     return db(this.tablename)
       .where({ id })
-      .first()
+      .first();
   }
 
   add(item: any) {
     return db(this.tablename)
       .insert(item)
-      .returning('*')
+      .returning("*");
   }
 
   update(id: number, item: any) {
     return db(this.tablename)
       .where({ id })
       .update(item)
-      .returning('*')
+      .returning("*");
   }
 
   remove(id: number) {
     return db(this.tablename)
       .where({ id })
-      .del()
+      .del();
   }
 }
 
-export const User = new Model('users')
-export const Project = new Model('projects')
+export const User = new Model("users");
+export const Project = new Model("projects");
