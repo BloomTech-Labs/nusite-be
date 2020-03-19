@@ -1,5 +1,5 @@
-import supertest from 'supertest'
-import server from './server'
+import supertest from "supertest";
+import server from "./server";
 
 describe("root path test", () => {
   it("should check the root path of the server", async () => {
@@ -7,4 +7,4 @@ describe("root path test", () => {
     //Does return an expected status code
     expect(res.status).toBe(200);
   });
-}); 
+});
