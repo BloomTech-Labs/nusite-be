@@ -42,9 +42,10 @@ class Model {
   }
 }
 
-class ProjectModel {
+class ProjectModel extends Model {
   tablename: string;
   constructor(tablename: string) {
+    super(tablename)
     this.tablename = tablename;
   }
 
