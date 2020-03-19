@@ -42,5 +42,17 @@ class Model {
   }
 }
 
+class ProjectModel extends Model {
+  tablename: string;
+  constructor(tablename: string) {
+    super(tablename);
+    this.tablename = tablename;
+  }
+
+  findOwnerProjects(id: number) {
+    return db(this.tablename).where({ project_owner: id });
+  }
+}
+
 export const User = new Model("users");
-export const Project = new Model("projects");
+export const Project = new ProjectModel("projects");
