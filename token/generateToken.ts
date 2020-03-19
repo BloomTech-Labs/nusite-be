@@ -16,6 +16,8 @@ const generateToken = (user: UserValues): string => {
   return sign(payload, secret, options);
 };
 
+export default generateToken;
+
 interface PayloadValue {
   subject: number;
   username: string;
