@@ -4,7 +4,7 @@
   "description": "🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.ts",
+    "start": "node 'dist/index.js'",
     "server": "nodemon index.ts",
     "build": "tsc -p .",
     "format": "prettier \"**/*.{ts,tsx}\" --write",
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/Lambda-School-Labs/nusite-be#readme",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.3",
     "@types/jsonwebtoken": "^8.3.8",
     "@types/node": "^13.9.0",
