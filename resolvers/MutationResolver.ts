@@ -42,6 +42,11 @@ async function login(_parent: any, args: LoginValues): Promise<AuthResults> {
   }
 }
 
+export default {
+  signup,
+  login,
+};
+
 interface SignupValues {
   username: string;
   first_name: string;
@@ -62,5 +67,5 @@ interface AuthResults {
     first_name: string;
     last_name: string;
     email: string;
-  }
+  };
 }
