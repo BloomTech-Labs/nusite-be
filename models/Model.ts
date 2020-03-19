@@ -45,7 +45,7 @@ class Model {
 class ProjectModel extends Model {
   tablename: string;
   constructor(tablename: string) {
-    super(tablename)
+    super(tablename);
     this.tablename = tablename;
   }
 
