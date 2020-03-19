@@ -1,19 +1,19 @@
-import { User, Project } from '../models/Model';
+import { User, Project } from "../models/Model";
 
 function users() {
-  return User.find()
+  return User.find();
 }
 
 function projects() {
-  return Project.find()
+  return Project.find();
 }
 
 function user(parent: any, args: { id: number }) {
-  return User.findById(args.id)
+  return User.findById(args.id);
 }
 
 function project(parent: any, args: { id: number }) {
-  return Project.findById(args.id)
+  return Project.findById(args.id);
 }
 
 export default {
@@ -21,4 +21,4 @@ export default {
   projects,
   user,
   project,
-}
+};
