@@ -48,7 +48,7 @@ class ProjectModel {
     this.tablename = tablename;
   }
 
-  findUserProjects(id: number) {
+  findOwnerProjects(id: number) {
     return db(this.tablename).where({ project_owner: id });
   }
 }
