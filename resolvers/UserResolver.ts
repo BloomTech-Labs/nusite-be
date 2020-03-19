@@ -1,7 +1,7 @@
-import { Project } from '../models/Model'
+import { Project } from "../models/Model";
 
 function projects(parent: { id: number }) {
-  return Project.findUserProjects(parent.id)
+  return Project.findUserProjects(parent.id);
 }
 
-export default { projects }
+export default { projects };

@@ -49,8 +49,7 @@ class ProjectModel {
   }
 
   findUserProjects(id: number) {
-    return db(this.tablename)
-      .where({ project_owner: id })
+    return db(this.tablename).where({ project_owner: id });
   }
 }
 
