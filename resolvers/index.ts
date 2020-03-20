@@ -1,11 +1,13 @@
+import Query from "./Query";
 import Mutation from "./MutationResolver";
-import UserResolver from "./UserResolver";
-import ProjectResolver from "./ProjectResolver";
+import User from "./UserResolver";
+import Project from "./ProjectResolver";
 
 const resolvers = {
+  Query,
   Mutation,
-  UserResolver,
-  ProjectResolver,
+  User,
+  Project,
 };
 
 export default resolvers;
