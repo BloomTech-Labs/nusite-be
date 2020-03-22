@@ -1,4 +1,4 @@
-# PartNerd API 
+# PartNerd API
 
 ## Code Climate Scores
 
@@ -21,8 +21,9 @@ To get the server running locally:
 
 - Clone this repo
 - **npm install** to install all required dependencies
-- **npm server** to start the local server
+- **npm run server** to start the local server
 - **npm test** to start server using testing environment
+- **npm run coverage** to see test coverage
 
 ### Backend framework goes here
 
@@ -40,26 +41,11 @@ Node, Express, TypeScript, Apollo-Server, GraphQL
 
 #### Organization Routes
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
-
-#### User Routes
-
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| Method | Endpoint | Description |
+| ------ | -------- | ----------- |
+| GET    | `/`      | all users   | Welcome route to the API |
 
 # Data Model
-
-🚫This is just an example. Replace this with your data model
 
 #### USERS
 
@@ -101,43 +87,79 @@ Node, Express, TypeScript, Apollo-Server, GraphQL
 
 ---
 
-## 2️⃣ Actions
+## Queries
 
-🚫 This is an example, replace this with the actions that pertain to your backend
+```
+query {
+  users {
+    first_name
+    last_name
+    username
+    email
+  }
+}
 
-`getOrgs()` -> Returns all organizations
+query {
+  projects {
+    project_name
+    project_avatar
+    project_description
+  }
+}
 
-`getOrg(orgId)` -> Returns a single organization by ID
+query {
+  user(id: 1) {
+    first_name
+    last_name
+    username
+    email
+  }
+}
 
-`addOrg(org)` -> Returns the created org
+query {
+  project(id: 1) {
+    project_name
+    project_avatar
+    project_description
+  }
+}
 
-`updateOrg(orgId)` -> Update an organization by ID
+query {
+  users {
+    username
+    projects {
+      project_name
+    }
+  }
+}
 
-`deleteOrg(orgId)` -> Delete an organization by ID
-<br>
-<br>
-<br>
-`getUsers(orgId)` -> if no param all users
+query {
+  projects {
+    project_name
+    project_owner {
+      username
+    }
+  }
+}
 
-`getUser(userId)` -> Returns a single user by user ID
-
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
-
-`updateUser(userId, changes object)` -> Updates a single user by ID.
-
-`deleteUser(userId)` -> deletes everything dependent on the user
+query {
+  projects {
+    project_name
+    project_developer {
+      username
+    }
+  }
+}
+```
 
 ## 3️⃣ Environment Variables
 
-In order for the app to function correctly, the user must set up their own environment variables.
-
-create a .env file that includes the following:
-
 _ DB_HOST - typically set to localhost for your localdb
-_ DB*NAME - name specified when creating your
-* DB*USER - set to postgres unless otherwise specified
-* DB*PASS - set to your local db password
-* JWT_SECRET - secret key for JWT hashing
+_ DB_NAME - name specified when creating your
+
+- DB_USER - set to postgres unless otherwise specified
+- DB_PASS - set to your local db password
+- JWT_SECRET - secret key for JWT hashing
 
 ## Contributing
 
