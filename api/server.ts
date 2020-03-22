@@ -9,6 +9,10 @@ const server = new ApolloServer({
   resolvers,
 });
 
+app.use("/", (req, res) => {
+  res.send("Checking Tests");
+});
+
 server.applyMiddleware({ app, cors: false });
 
 export default app;
