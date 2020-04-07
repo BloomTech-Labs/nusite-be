@@ -1,4 +1,6 @@
 import * as Knex from "knex";
+const bcrypt = require("bcryptjs");
+const hash = async (password: string) => await bcrypt.hash(password, 12);
 
 export async function seed(knex: Knex): Promise<any> {
   // Deletes ALL existing entries
@@ -6,52 +8,47 @@ export async function seed(knex: Knex): Promise<any> {
   // Inserts seed entries
   return knex("users").insert([
     {
-      id: 1,
       username: "Grey05",
       first_name: "Meredith",
       last_name: "Grey",
       company: "Seattle Grace",
-      password: "testing1",
+      password: `${await hash("testing1")}`,
       email: "meredith@grey.com",
     },
     {
-      id: 2,
       username: "dev4lyfe",
-      first_name: "Johnny",
+      first_name: "Betty",
       last_name: "Who",
       company: "Etsy",
-      password: "password1",
-      email: "johnnyW@gmail.com",
+      password: `${await hash("testing1")}`,
+      email: "BettyW@gmail.com",
       dev_experience: 5,
       dev_education: 8,
     },
     {
-      id: 3,
       username: "AdlerDesigns",
       first_name: "Grace",
       last_name: "Adler",
       company: "AdlerDesigner",
-      password: "password2",
+      password: `${await hash("testing1")}`,
       email: "GraceA@gmail.com",
     },
     {
-      id: 4,
       username: "coding4you",
-      first_name: "Richard",
-      last_name: "Lee",
+      first_name: "Leslie",
+      last_name: "Knope",
       company: "Chase",
-      password: "password3",
-      email: "RichardLee@gmail.com",
+      password: `${await hash("testing1")}`,
+      email: "Leslie@gmail.com",
       dev_experience: 4,
       dev_education: 7,
     },
     {
-      id: 5,
       username: "Potter2001",
       first_name: "Harry",
       last_name: "Potter",
       company: "FaceBook",
-      password: "password4",
+      password: `${await hash("testing1")}`,
       email: "HarryPotter@gmail.com",
       dev_experience: 9,
       dev_education: 10,
