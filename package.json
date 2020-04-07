@@ -1,13 +1,12 @@
 {
   "name": "nusite-be",
   "version": "1.0.0",
-  "description": "🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.",
+  "description": "A site needs users. To support users, we need to create a basic scaffold for our site that gets them in the door and allows them to sign up for the service.",
   "main": "index.js",
   "scripts": {
-    "prestart": "tsc -p .",
-    "start": "node 'dist/index.js'",
+    "start": "node dist/index.js",
     "server": "nodemon index.ts",
-    "build": "tsc -p .",
+    "build": "npx tsc -p .",
     "format": "prettier \"**/*.{ts,tsx}\" --write",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
