@@ -12,7 +12,7 @@ const server = new ApolloServer({
   playground: true,
 });
 
-server.applyMiddleware({ app, cors: false });
+server.applyMiddleware({ app, cors: { origin: '*', credentials: true } });
 
 app.use("/", (_req, res) => {
   res.send("Welcome to Partnerd API");
