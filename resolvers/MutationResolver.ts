@@ -13,6 +13,7 @@ async function signup(_parent: any, args: SignupValues): Promise<AuthResults> {
       user,
     };
   } catch (error) {
+    console.log(error)
     throw new Error(error);
   }
 }
@@ -38,6 +39,7 @@ async function login(_parent: any, args: LoginValues): Promise<AuthResults> {
       user,
     };
   } catch (error) {
+    console.log(error)
     throw new Error(error);
   }
 }
