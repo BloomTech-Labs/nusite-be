@@ -23,15 +23,13 @@ To get the server running locally:
 - **npm test** to start server using testing environment
 - **npm run coverage** to see test coverage
 
-### Backend framework goes here
+### Backend frameworks
 
-Node, Express, TypeScript, Apollo-Server, GraphQL
-🚫 Why did you choose this framework?
+Node, Express, TypeScript, GraphQL, Apollo-Server
 
-- Point One
-- Point Two
-- Point Three
-- Point Four
+- TypeScript to make a theoretically less error prone backend
+- GraphQL for it's performance
+- Apollo-Server is used to help communicate with the frontend of the application
 
 ## Endpoints
 
