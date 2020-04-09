@@ -1,19 +1,17 @@
 module.exports = {
-  roots: ['<rootDir>/'],
+  roots: ["<rootDir>/"],
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    "^.+\\.tsx?$": "ts-jest",
   },
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  coverageReporters: [
-    "json-summary",
-    "text",
-    "lcov"
- ],
+  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  coverageReporters: ["json-summary", "text", "lcov"],
   collectCoverageFrom: [
     "**/*.{js,jsx,ts,tsx}",
-     "!**/node_modules/**", 
-     "!**/vendor/**",
-     "!**/coverage/**",
-    ]
-}
+    "!**/node_modules/**",
+    "!**/vendor/**",
+    "!**/coverage/**",
+    "!**/dist/**",
+    "!**/data/**",
+  ],
+};
