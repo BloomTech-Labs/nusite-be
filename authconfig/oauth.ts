@@ -11,7 +11,7 @@ passport.use(
       clientSecret: process.env.GOOGLE_SECRET,
       callbackURL: "/auth/google/redirect",
     },
-      // passport callback function?
+    // passport callback function?
     (accessToken, refreshToken, profile, done) => {
       User.findOrCreate({ googleId: profile.id }, function(err, user) {
         return done(err, user);
