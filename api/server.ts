@@ -1,5 +1,4 @@
 import express from "express";
-import passport from "passport";
 import { ApolloServer } from "apollo-server-express";
 import typeDefs from "../types";
 import resolvers from "../resolvers";
