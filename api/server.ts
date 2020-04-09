@@ -35,6 +35,7 @@ app.get(
   }),
   (req, res) => {
     res.redirect("/dashboard");
-});
+  }
+);
 
 export default app;
