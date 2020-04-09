@@ -30,7 +30,7 @@ app.get("/auth/google/redirect",
     failureRedirect: "/"
   }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect("/dashboard");
 });
 
 export default app;
