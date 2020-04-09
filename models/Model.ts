@@ -1,7 +1,7 @@
 import db from "../data/dbconfig";
 
 class Model {
-  findOrCreate(arg0: { googleId: any; }, arg1: (err: any, user: any) => any) {
+  findOrCreate(arg0: { googleId: any }, arg1: (err: any, user: any) => any) {
     throw new Error("Method not implemented.");
   }
   tablename: string;
