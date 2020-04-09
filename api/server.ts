@@ -9,15 +9,14 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true,
+  playground: true,
 });
 
-server.applyMiddleware({ app, cors: false });
+server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use("/", (req, res) => {
-  res.send("Checking Tests");
+app.use("/", (_req, res) => {
+  res.send("Welcome to Partnerd API");
 });
 
 export default app;

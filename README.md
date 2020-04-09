@@ -5,45 +5,40 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/c9c9e999329f1ce3ccba/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/nusite-be/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c9c9e999329f1ce3ccba/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/nusite-be/test_coverage)
 
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by. Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### Staging Backend delpoyed at [Heroku](https://partnerd-staging.herokuapp.com/) <br>
 
-## 1️⃣ Getting started
+#### Master Backend delpoyed at [Heroku](https://partnerd-master.herokuapp.com/) <br>
+
+## Getting started
 
 To get the server running locally:
 
 - Clone this repo
 - **npm install** to install all required dependencies
+- \*\*npm run build to build only if you would like to run the start script, otherwise:
+
 - **npm run server** to start the local server
 - **npm test** to start server using testing environment
 - **npm run coverage** to see test coverage
 
-### Backend framework goes here
+### Backend frameworks
 
-Node, Express, TypeScript, Apollo-Server, GraphQL
-🚫 Why did you choose this framework?
+Node, Express, TypeScript, GraphQL, Apollo-Server
 
-- Point One
-- Point Two
-- Point Three
-- Point Four
+- TypeScript to make a theoretically less error prone backend
+- GraphQL for it's performance
+- Apollo-Server is used to help communicate with the frontend of the application
 
-## 2️⃣ Endpoints
+## Endpoints
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
+With the nature of GraphQL, you will only have one endpoint, with the exception of the welcome route
 
-#### Organization Routes
-
-| Method | Endpoint | Description |
-| ------ | -------- | ----------- |
-| GET    | `/`      | all users   | Welcome route to the API |
+| Method | Endpoint   | Description                           |
+| ------ | ---------- | ------------------------------------- |
+| GET    | `/`        | all users                             | Welcome route to the API |
+| POST   | `/graphql` | graphql endpoint to test your queries |
 
 # Data Model
 
@@ -88,6 +83,8 @@ Node, Express, TypeScript, Apollo-Server, GraphQL
 ---
 
 ## Queries
+
+---
 
 ```
 query {
@@ -152,7 +149,50 @@ query {
 }
 ```
 
-## 3️⃣ Environment Variables
+---
+
+#### Mutations
+
+---
+
+```
+mutation {
+  signup(
+    username: "test"
+    first_name: "test"
+    last_name: "test"
+    email: "test@partnerd.com"
+    password: "test"
+  ) {
+    token
+    user {
+      username
+      first_name
+      last_name
+      email
+    }
+  }
+}
+
+mutation {
+  login(
+    email: "test@partnerd.com"
+    password: "test"
+  ) {
+    token
+    user {
+      username
+      first_name
+      last_name
+      email
+    }
+  }
+}
+```
+
+---
+
+## Environment Variables
 
 _ DB_HOST - typically set to localhost for your localdb
 _ DB_NAME - name specified when creating your
@@ -200,5 +240,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/Lambda-School-Labs/nusite-fe) for details on the fronend of our project.
