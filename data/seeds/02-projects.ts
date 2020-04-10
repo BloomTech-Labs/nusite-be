@@ -6,7 +6,6 @@ export async function seed(knex: Knex): Promise<any> {
   // Inserts seed entries
   return knex("projects").insert([
     {
-      id: 1,
       project_name: "Hospital",
       project_avatar: null,
       project_owner: 1,
@@ -15,7 +14,6 @@ export async function seed(knex: Knex): Promise<any> {
       showcase: true,
     },
     {
-      id: 2,
       project_name: "Etsy",
       project_avatar: null,
       project_owner: 2,
@@ -25,7 +23,6 @@ export async function seed(knex: Knex): Promise<any> {
       showcase: true,
     },
     {
-      id: 3,
       project_name: "AdlerDesigner",
       project_avatar: null,
       project_owner: 3,
@@ -35,7 +32,6 @@ export async function seed(knex: Knex): Promise<any> {
       showcase: true,
     },
     {
-      id: 4,
       project_name: "Banking4You",
       project_avatar: null,
       project_owner: 4,

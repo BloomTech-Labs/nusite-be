@@ -25,7 +25,6 @@ describe(" Model", () => {
 
   test("should add a project", async () => {
     const project = {
-      id: 10,
       project_name: "testing1",
       project_avatar: null,
       project_owner: 4,
