@@ -13,5 +13,8 @@ module.exports = {
     "!**/coverage/**",
     "!**/dist/**",
     "!**/data/**",
+    "!jest.config.js",
+    "!index.ts",
+    "!knexfile.ts",
   ],
 };
