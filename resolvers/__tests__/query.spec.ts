@@ -15,7 +15,15 @@ describe("Should test main queries", () => {
 
   test("should get user id 1", async () => {
     const res = await Query.user(null, { id: 1 });
+    // should return user with id of 1
+    expect(res.id).toBe(1);
+    expect(res.first_name).toMatch(/meredith/i);
+  });
 
-    console.log(res);
+  test("should get project id 1", async () => {
+    const res = await Query.project(null, { id: 1 });
+    // should return project with id of 1
+    expect(res.id).toBe(1);
+    expect(res.project_name).toMatch(/hospital/i);
   });
 });
