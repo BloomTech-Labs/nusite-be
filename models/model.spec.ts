@@ -36,4 +36,24 @@ describe(" Model", () => {
 
     expect(addProject.id).toBeDefined();
   });
+
+  test("should update a project", async () => {
+    const project = {
+      id: 1,
+      project_name: "update",
+      project_avatar: null,
+      project_owner: 4,
+      completed: true,
+      marketplace: false,
+      showcase: true,
+    };
+    const [updateProject] = await Project.update(1, project);
+    expect(updateProject.project_name).toBe("update");
+  });
+
+  test("should delete aa project", async () => {
+    const project = await Project.remove(2);
+
+    console.log(project);
+  });
 });
