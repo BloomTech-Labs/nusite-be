@@ -32,4 +32,20 @@ describe("Auth Mutations", () => {
 
     expect(res.status).toBe(200);
   });
+
+  test("should test login mutation", async () => {
+    const loginUser = gql`
+      mutation {
+        login(email: "ray@test.com", password: "test") {
+          token
+        }
+      }
+    `;
+
+    const res = await supertest(server)
+      .post("/")
+      .query(loginUser);
+
+    expect(res.status).toBe(200);
+  });
 });
