@@ -1,74 +1,46 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
+# PartNerd API
 
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
+## Code Climate Scores
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
+[![Maintainability](https://api.codeclimate.com/v1/badges/c9c9e999329f1ce3ccba/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/nusite-be/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c9c9e999329f1ce3ccba/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/nusite-be/test_coverage)
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### Staging Backend delpoyed at [Heroku](https://partnerd-staging.herokuapp.com/) <br>
 
-## 1️⃣ Getting started
+#### Master Backend delpoyed at [Heroku](https://partnerd-master.herokuapp.com/) <br>
+
+## Getting started
 
 To get the server running locally:
 
-🚫 adjust these scripts to match your project
-
 - Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
+- **npm install** to install all required dependencies
+- \*\*npm run build to build only if you would like to run the start script, otherwise:
 
-### Backend framework goes here
+- **npm run server** to start the local server
+- **npm test** to start server using testing environment
+- **npm run coverage** to see test coverage
 
-🚫 Why did you choose this framework?
+### Backend frameworks
 
--    Point One
--    Point Two
--    Point Three
--    Point Four
+Node, Express, TypeScript, GraphQL, Apollo-Server
 
-## 2️⃣ Endpoints
+- TypeScript to make a theoretically less error prone backend
+- GraphQL for it's performance
+- Apollo-Server is used to help communicate with the frontend of the application
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
+## Endpoints
 
-#### Organization Routes
+With the nature of GraphQL, you will only have one endpoint, with the exception of the welcome route
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
-
-#### User Routes
-
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| Method | Endpoint   | Description                           |
+| ------ | ---------- | ------------------------------------- |
+| GET    | `/`        | all users                             | Welcome route to the API |
+| POST   | `/graphql` | graphql endpoint to test your queries |
 
 # Data Model
-
-🚫This is just an example. Replace this with your data model
-
-#### 2️⃣ ORGANIZATIONS
-
----
-
-```
-{
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
-}
-```
 
 #### USERS
 
@@ -76,60 +48,159 @@ To get the server running locally:
 
 ```
 {
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
+  id: INT
+  username: STRING (unique)
   first_name: STRING
   last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  company: STRING (optional)
+  password: STRING
+  email: STRING (unique)
+  dev_experience: INT (optional)
+  dev_education: INT (optional)
 }
 ```
 
-## 2️⃣ Actions
+---
 
-🚫 This is an example, replace this with the actions that pertain to your backend
+#### PROJECTS
 
-`getOrgs()` -> Returns all organizations
+---
 
-`getOrg(orgId)` -> Returns a single organization by ID
+```
+{
+  id: INT
+  project_name: STRING
+  project_avatar: STRING
+  project_description: STRING
+  project_owner: INT (optional)
+  project_developer: INT (optional)
+  completed: BOOLEAN
+  marketplace: BOOLEAN
+  showcase: BOOLEAN
+}
+```
 
-`addOrg(org)` -> Returns the created org
+---
 
-`updateOrg(orgId)` -> Update an organization by ID
+## Queries
 
-`deleteOrg(orgId)` -> Delete an organization by ID
-<br>
-<br>
-<br>
-`getUsers(orgId)` -> if no param all users
+---
 
-`getUser(userId)` -> Returns a single user by user ID
+```
+query {
+  users {
+    first_name
+    last_name
+    username
+    email
+  }
+}
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
+query {
+  projects {
+    project_name
+    project_avatar
+    project_description
+  }
+}
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+query {
+  user(id: 1) {
+    first_name
+    last_name
+    username
+    email
+  }
+}
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+query {
+  project(id: 1) {
+    project_name
+    project_avatar
+    project_description
+  }
+}
 
-## 3️⃣ Environment Variables
+query {
+  users {
+    username
+    projects {
+      project_name
+    }
+  }
+}
 
-In order for the app to function correctly, the user must set up their own environment variables.
+query {
+  projects {
+    project_name
+    project_owner {
+      username
+    }
+  }
+}
 
-create a .env file that includes the following:
+query {
+  projects {
+    project_name
+    project_developer {
+      username
+    }
+  }
+}
+```
 
-🚫 These are just examples, replace them with the specifics for your app
-    
-    *  STAGING_DB - optional development db for using functionality not available in SQLite
-    *  NODE_ENV - set to "development" until ready for "production"
-    *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
-    *  SENDGRID_API_KEY - this is generated in your Sendgrid account
-    *  stripe_secret - this is generated in the Stripe dashboard
-    
+---
+
+#### Mutations
+
+---
+
+```
+mutation {
+  signup(
+    username: "test"
+    first_name: "test"
+    last_name: "test"
+    email: "test@partnerd.com"
+    password: "test"
+  ) {
+    token
+    user {
+      username
+      first_name
+      last_name
+      email
+    }
+  }
+}
+
+mutation {
+  login(
+    email: "test@partnerd.com"
+    password: "test"
+  ) {
+    token
+    user {
+      username
+      first_name
+      last_name
+      email
+    }
+  }
+}
+```
+
+---
+
+## Environment Variables
+
+_ DB_HOST - typically set to localhost for your localdb
+_ DB_NAME - name specified when creating your
+
+- DB_USER - set to postgres unless otherwise specified
+- DB_PASS - set to your local db password
+- JWT_SECRET - secret key for JWT hashing
+
 ## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
@@ -138,11 +209,12 @@ Please note we have a [code of conduct](./code_of_conduct.md). Please follow it 
 
 ### Issue/Bug Request
 
- **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
- - Check first to see if your issue has already been reported.
- - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
- - Create a live example of the problem.
- - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, and any potential solutions you have considered.
+**If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
+
+- Check first to see if your issue has already been reported.
+- Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
+- Create a live example of the problem.
+- Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
 
 ### Feature Requests
 
@@ -168,5 +240,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/Lambda-School-Labs/nusite-fe) for details on the fronend of our project.
