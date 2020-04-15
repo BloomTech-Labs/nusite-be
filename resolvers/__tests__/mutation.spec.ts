@@ -31,18 +31,17 @@ describe("testing auth mutations", () => {
   test("should test update mutation", async () => {
     const user = {
       id: 1,
-      username: "test",
-      first_name: "test",
-      last_name: "test",
-      password: "test",
-      email: "test@testing.com",
-      company: "",
+      username: "testing update",
+      last_name: "testing update",
+      password: "testing update",
+      email: "testing update@testing.com",
+      company: "testing update",
       dev_experience: 1,
       dev_education: 2,
     };
 
     const res = await Mutation.updateUser({ id: 1 }, user);
 
-    console.log(res);
+    expect(res.username).toBe(user.username);
   });
 });

@@ -13,7 +13,6 @@ const typeDefs = gql`
     username: String!
     first_name: String!
     last_name: String!
-    password: String!
     email: String!
     company: String
     dev_experience: Int
@@ -51,6 +50,16 @@ const typeDefs = gql`
     # claiming a project/job
     # update a project
     # update a user
+    updateUser(
+      id: ID!
+      username: String
+      first_name: String
+      last_name: String
+      email: String
+      company: String
+      dev_experience: Int
+      dev_education: Int
+    ): User
     # potentially "delete" for developers
     # archive users
     # delete projects

@@ -44,9 +44,21 @@ async function login(_parent: any, args: LoginValues): Promise<AuthResults> {
   }
 }
 
+const updateUser = async (_parent: any, args: UserValues) => {
+  const user = await User.findBy({ id: args.id });
+  if (!user) {
+    throw new Error("No such user found");
+  }
+
+  const [updatedUser] = await User.update(args.id, args);
+
+  return updatedUser;
+};
+
 export default {
   signup,
   login,
+  updateUser,
 };
 
 interface SignupValues {
@@ -55,6 +67,18 @@ interface SignupValues {
   last_name: string;
   password: string;
   email: string;
+}
+
+interface UserValues {
+  id: number;
+  username?: string;
+  first_name?: string;
+  last_name?: string;
+  password?: string;
+  email?: string;
+  company?: string;
+  dev_experience?: number;
+  dev_education?: number;
 }
 
 interface LoginValues {
