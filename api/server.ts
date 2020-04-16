@@ -1,21 +1,23 @@
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
+import { buildContext } from "graphql-passport";
 import passport from "passport";
 import typeDefs from "../types";
 import resolvers from "../resolvers";
 
 const app = express();
 
+app.use(passport.initialize());
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,
   playground: true,
+  context: ({ req, res }) => buildContext({ req, res }),
 });
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
-
-app.use(passport.initialize());
 
 app.use("/", (_req, res) => {
   res.send("Welcome to Partnerd API");
