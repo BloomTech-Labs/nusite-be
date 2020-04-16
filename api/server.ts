@@ -11,8 +11,10 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: true,
-  playground: true,
+  // Allow the GraphQL playground
+  // Will not allow in the production deploy
+  introspection: process.env.NODE_ENV !== "production",
+  playground: process.env.NODE_ENV !== "production",
 });
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
