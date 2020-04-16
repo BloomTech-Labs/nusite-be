@@ -1,10 +1,10 @@
 import { User } from "../models/Model";
 import bcrypt from "bcryptjs";
 import passport from "passport";
-import { GraphQLLocalStrategy } from "graphql-passport";
+const LocalStrategy = require("passport-local");
 
 passport.use(
-  new GraphQLLocalStrategy(async (email, password, done) => {
+  new LocalStrategy(async (email, password, done) => {
     const [user] = await User.findBy({ email: email });
 
     console.log(user, "GraphQL Local Strategy");

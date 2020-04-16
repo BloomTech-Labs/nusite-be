@@ -18,32 +18,20 @@ async function signup(_parent: any, args: SignupValues): Promise<AuthResults> {
   }
 }
 
-async function login(
-  _parent: any,
-  args: LoginValues,
-  context: any
-): Promise<AuthResults> {
+async function login(_parent: any, args: LoginValues): Promise<AuthResults> {
   try {
-    console.log(context.authenticate);
-
-    // Run the graphql local passport strategy
-    const { user, info } = await context.authenticate("graphql-local", {
-      email: args.email,
-      password: args.password,
-    });
-    // const user = await User.findBy({ email: args.email });
+    const user = await User.findBy({ email: args.email });
 
     // Return error if there are no users found
-    // if (!user) {
-    //   throw new Error("No such user found");
-    // }
-    // const valid = await bcrypt.compare(args.password, user.password);
+    if (!user) {
+      throw new Error("No such user found");
+    }
+    const valid = await bcrypt.compare(args.password, user.password);
 
     // Return error if the password is incorrect
-    // if (!valid) {
-    //   throw new Error("Password is incorrect");
-    // }
-
+    if (!valid) {
+      throw new Error("Password is incorrect");
+    }
     const token: string = await generateToken(user);
 
     return {
