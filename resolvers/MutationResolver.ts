@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import { User } from "../models/Model";
+import { Project } from "../models/Model";
 import generateToken from "../token/generateToken";
 
 async function signup(_parent: any, args: SignupValues): Promise<AuthResults> {
@@ -55,10 +56,20 @@ const updateUser = async (_parent: any, args: UserValues) => {
   return updatedUser;
 };
 
+const addProject = async (_parent: any, args: ProjectValues) => {
+  try {
+    const [project] = await Project.add(args);
+    return project;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export default {
   signup,
   login,
   updateUser,
+  addProject,
 };
 
 interface SignupValues {
@@ -79,6 +90,12 @@ interface UserValues {
   company?: string;
   dev_experience?: number;
   dev_education?: number;
+}
+
+interface ProjectValues {
+  id: number;
+  project_name: string;
+  project_owner: number;
 }
 
 interface LoginValues {

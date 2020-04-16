@@ -46,10 +46,9 @@ const typeDefs = gql`
       email: String!
     ): AuthPayload
     login(email: String!, password: String!): AuthPayload
-    # adding a project
-    # claiming a project/job
-    # update a project
-    # update a user
+
+    addProject(project_name: String, project_owner: Int): Project
+
     updateUser(
       id: ID!
       username: String
@@ -60,9 +59,6 @@ const typeDefs = gql`
       dev_experience: Int
       dev_education: Int
     ): User
-    # potentially "delete" for developers
-    # archive users
-    # delete projects
   }
 `;
 
