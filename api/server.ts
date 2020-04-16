@@ -24,9 +24,9 @@ app.set("view engine", "ejs");
 
 app.use(passport.initialize());
 
-app.use("/", (_req, res) => {
-  res.send("Welcome to Partnerd API");
-});
+// app.use("/", (_req, res) => {
+//   res.send("Welcome to Partnerd API");
+// });
 
 // auth route setup - take out?
 app.use("/auth", authRoutes);
