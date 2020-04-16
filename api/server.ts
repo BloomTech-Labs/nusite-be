@@ -5,6 +5,8 @@ import passport from "passport";
 import typeDefs from "../types";
 import resolvers from "../resolvers";
 
+const authRoutes = require("../routes/auth-routes");
+
 const app = express();
 
 app.use(passport.initialize());
@@ -21,8 +23,19 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 
+// set view engine - Take Out!
+app.set("view engine", "ejs");
+
 app.use("/", (_req, res) => {
   res.send("Welcome to Partnerd API");
+});
+
+// auth route setup - take out?
+app.use("/auth", authRoutes);
+
+// render home - take out
+app.use("/", (_req, res) => {
+  res.render("home");
 });
 
 app.get(
