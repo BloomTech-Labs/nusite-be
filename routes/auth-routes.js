@@ -15,8 +15,11 @@ router.get("/logout", (req, res) => {
 // auth with google
 router.get(
   "/google",
+  // (req, res) => {
+  //   res.send("logging in with google");
+  // }
   passport.authenticate("google", {
-    scope: ["email"],
+    scope: ["profile", "email"],
   })
 );
 
