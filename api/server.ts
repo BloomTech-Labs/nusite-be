@@ -6,7 +6,7 @@ import typeDefs from "../types";
 import resolvers from "../resolvers";
 
 const authRoutes = require("../routes/auth-routes");
-const passportSetup = require('../authconfig/oauth');
+const passportSetup = require("../authconfig/oauth");
 
 const app = express();
 
