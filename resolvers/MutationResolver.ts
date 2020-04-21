@@ -65,11 +65,32 @@ const addProject = async (_parent: any, args: ProjectValues) => {
   }
 };
 
+const updateProject = async (_parent: any, args: ProjectValues) => {
+  try {
+    const [project] = await Project.update(args.id, args);
+    return project;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const deleteProject = async (_parent: any, args: ProjectValues) => {
+  try {
+    const project = await Project.findById(args.id);
+    await Project.remove(args.id);
+    return project;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export default {
   signup,
   login,
   updateUser,
   addProject,
+  updateProject,
+  deleteProject,
 };
 
 interface SignupValues {
@@ -96,6 +117,7 @@ interface ProjectValues {
   id: number;
   project_name: string;
   project_owner: number;
+  project_developer: number;
 }
 
 interface LoginValues {

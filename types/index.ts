@@ -49,6 +49,15 @@ const typeDefs = gql`
 
     addProject(project_name: String, project_owner: Int): Project
 
+    updateProject(
+      id: ID!
+      project_name: String
+      project_owner: Int
+      project_developer: Int
+    ): Project
+
+    deleteProject(id: ID!): Project
+
     updateUser(
       id: ID!
       username: String
