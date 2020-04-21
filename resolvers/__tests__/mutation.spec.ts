@@ -44,4 +44,30 @@ describe("testing auth mutations", () => {
 
     expect(res.username).toBe(user.username);
   });
+
+  test("test should add a project from project mutation", async () => {
+    const project = {
+      id: 7,
+      project_name: "Adding Project",
+      project_owner: 2,
+      project_developer: 2,
+    };
+
+    const res = await Mutation.addProject(null, project);
+
+    expect(res.id).toBeDefined();
+  });
+
+  test("test should update a project from project mutation", async () => {
+    const project = {
+      id: 1,
+      project_name: "Testing update project",
+      project_owner: 2,
+      project_developer: 2,
+    };
+
+    const res = await Mutation.updateProject({ id: 1 }, project);
+
+    expect(res.project_owner).toBe(project.project_owner);
+  });
 });
