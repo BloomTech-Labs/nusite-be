@@ -1,4 +1,4 @@
-import { User } from '../models/Model';
+import { User } from "../models/Model";
 
 export const checkUser = async (email: string) => {
   const user = await User.findBy({ email });
@@ -7,5 +7,5 @@ export const checkUser = async (email: string) => {
     throw new Error("No user with that email exits");
   }
 
-  return
-}
+  return;
+};

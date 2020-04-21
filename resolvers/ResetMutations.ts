@@ -1,4 +1,4 @@
-import { sign } from 'jsonwebtoken';
+import { sign } from "jsonwebtoken";
 import { checkUser } from "../utils";
 import { sendgridEmail } from "../utils/sendgrid";
 
@@ -8,7 +8,9 @@ async function initiateReset(_parent: any, args: { email: string }) {
 
   // Generate a token for the frontend to save
   // reset mutation will check token before the password is actually reset
-  const token = sign({ subject: args.email }, process.env.JWT_SECRET!, { expiresIn: "1h" });
+  const token = sign({ subject: args.email }, process.env.JWT_SECRET!, {
+    expiresIn: "1h",
+  });
 
   // call sendgrid component
   await sendgridEmail(args.email);
@@ -16,8 +18,8 @@ async function initiateReset(_parent: any, args: { email: string }) {
   // return the token and a message for completion
   return {
     token,
-    message: "Please check your email"
-  }
+    message: "Please check your email",
+  };
 }
 
-export default { initiateReset }
+export default { initiateReset };
