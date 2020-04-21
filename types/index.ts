@@ -5,6 +5,8 @@ const typeDefs = gql`
     users: [User]!
     projects: [Project]
     user(id: ID!): User
+    username(username: String): User
+    userEmail(email: String): User
     project(id: ID!): Project
   }
 
