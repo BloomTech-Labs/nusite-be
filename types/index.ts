@@ -40,6 +40,11 @@ const typeDefs = gql`
     user: User
   }
 
+  type ResetPayload {
+    token: String
+    message: String
+  }
+
   type Mutation {
     signup(
       username: String!
@@ -56,6 +61,9 @@ const typeDefs = gql`
     # potentially "delete" for developers
     # archive users
     # delete projects
+
+    initiateReset(email: String!): ResetPayload
+    resetPassword(email: String!, password: String!): ResetPayload
   }
 `;
 
