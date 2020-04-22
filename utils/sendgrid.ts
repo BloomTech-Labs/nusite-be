@@ -23,7 +23,7 @@ export const sendgridEmail = async (email: string) => {
   };
 
   // send the message
-  await sgMail.send(msg);
+  sgMail.send(msg);
 
   return "Please check your email";
 };
