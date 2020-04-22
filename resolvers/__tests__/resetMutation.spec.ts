@@ -1,14 +1,13 @@
 import Reset from "../ResetMutations";
 
 describe("Testing reset password", () => {
-
-  test('should test initiateReset mutation', async () => {
+  test("should test initiateReset mutation", async () => {
     const user = { email: "HarryPotter@gmail.com" };
 
     const res = await Reset.initiateReset(null, user);
 
     expect(res).toBeDefined();
-  })
+  });
 
   test("should test resetPassword Mutation", async () => {
     const user = { email: "HarryPotter@gmail.com", password: "testing" };

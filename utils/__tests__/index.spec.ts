@@ -25,7 +25,7 @@ describe("tests for added utils", () => {
     expect(res).not.toBe(password);
   });
 
-  test('should test sendgrid function', async () => {
+  test("should test sendgrid function", async () => {
     const res = await sendgridEmail(email);
     expect(res).toMatch(/Please check your email/i);
   });
