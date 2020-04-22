@@ -12,9 +12,9 @@ export const checkUser = async (email: string) => {
   return user;
 };
 
-export const resetToken = (email: string): string => {
+export const resetToken = async (email: string): Promise<string> => {
   // reset mutation will check token before the password is actually reset
-  const token = sign({ subject: email }, process.env.JWT_SECRET!, {
+  const token = await sign({ subject: email }, process.env.JWT_SECRET!, {
     expiresIn: "1h",
   });
 

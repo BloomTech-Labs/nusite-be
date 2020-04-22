@@ -4,13 +4,13 @@ import { User } from "../models/Model";
 
 async function initiateReset(_parent: any, args: { email: string }) {
   // Make sure the user exists
-  await checkUser(args.email);
+  const user = await checkUser(args.email);
 
   // Generate a token for the frontend to save
-  const token = await resetToken(args.email);
+  const token = await resetToken(user.email);
 
   // call sendgrid component
-  const message = await sendgridEmail(args.email);
+  const message = await sendgridEmail(user.email);
 
   // return the token and a message for completion
   return {
