@@ -1,4 +1,6 @@
-import { User } from '../models/Model';
+import { User } from "../models/Model";
+import { sign } from "jsonwebtoken";
+import { hash } from "bcryptjs";
 
 export const checkUser = async (email: string) => {
   const user = await User.findBy({ email });
@@ -7,5 +9,24 @@ export const checkUser = async (email: string) => {
     throw new Error("No user with that email exits");
   }
 
-  return
-}
+  return user;
+};
+
+export const resetToken = (email: string): string => {
+  // reset mutation will check token before the password is actually reset
+  const token = sign({ subject: email }, process.env.JWT_SECRET!, {
+    expiresIn: "1h",
+  });
+
+  return token;
+};
+
+export const hashPassword = (password: string): Promise<string> => {
+  if (!password) {
+    throw new Error("Please provide a new password");
+  }
+
+  const hashedPassword = hash(password, 12);
+
+  return hashedPassword;
+};

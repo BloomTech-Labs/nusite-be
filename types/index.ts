@@ -65,7 +65,7 @@ const typeDefs = gql`
     # initiate should send a token, secret possibly be email?
     initiateReset(email: String!): ResetPayload
     # Check the token, if good save the new password
-    resetPassword(email: String!, password: String!): ResetPayload
+    resetPassword(email: String!, password: String!): String
   }
 `;
 
