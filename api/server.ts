@@ -6,7 +6,8 @@ import typeDefs from "../types";
 import resolvers from "../resolvers";
 
 const authRoutes = require("../routes/auth-routes");
-const passportSetup = require('../authconfig/oauth');
+const passportSetup = require("../authconfig/oauth");
+
 
 const app = express();
 
@@ -24,25 +25,19 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 
-// set view engine - Take Out!
-app.set("view engine", "ejs");
-
-// app.use("/", (_req, res) => {
-//   res.send("Welcome to Partnerd API");
-// });
-
-// auth route setup - take out?
-app.use("/auth", authRoutes);
-
-// render home - take out
 app.use("/", (_req, res) => {
-  res.render("home");
+  res.send("Welcome to Partnerd API");
 });
+
+app.use("/auth", authRoutes);
 
 app.get(
   "/auth/google",
   passport.authenticate("google", {
-    scope: "https://www.googleapis.com/auth/userinfo.email",
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+    ]
   })
 );
 
@@ -52,6 +47,8 @@ app.get(
     failureRedirect: "/",
   }),
   (req, res) => {
+    return res
+      .status(200),
     res.redirect("/dashboard");
   }
 );
