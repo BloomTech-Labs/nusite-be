@@ -32,6 +32,7 @@ async function resetPassword(
 
   // Update the user password
   user.password = hashedPassword;
+  await User.update(user.id, user);
 
   return "Password Updated";
 }
