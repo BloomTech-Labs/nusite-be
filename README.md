@@ -188,6 +188,17 @@ mutation {
     }
   }
 }
+
+mutation {
+  initiateReset(email: "test@gmail.com"){
+    token
+    message
+  }
+}
+
+mutation {
+  resetPassword(email: "test@gmail.com", password: "test")
+}
 ```
 
 ---
