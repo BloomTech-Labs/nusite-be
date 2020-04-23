@@ -1,5 +1,12 @@
 import Mutation from "../MutationResolver";
 
+import dbconfig from "../../data/dbconfig";
+
+beforeAll(async done => {
+  await dbconfig.seed.run();
+  done();
+});
+
 describe("testing auth mutations", () => {
   test("should test signup mutation", async () => {
     const user = {
@@ -69,5 +76,16 @@ describe("testing auth mutations", () => {
     const res = await Mutation.updateProject({ id: 1 }, project);
 
     expect(res.project_owner).toBe(project.project_owner);
+  });
+  test("test should delete a project", async () => {
+    const project = {
+      id: 2,
+      project_name: "Delete",
+      project_owner: 2,
+      project_developer: 2,
+    };
+
+    const res = await Mutation.deleteProject({ id: 2 }, project);
+    expect(res).toBeDefined();
   });
 });
