@@ -2,6 +2,10 @@ import bcrypt from "bcryptjs";
 import { User } from "../models/Model";
 import generateToken from "../token/generateToken";
 
+// Just for testing THIS WILL BE TEMPORARY AND REFACTORED
+// TODO: REFACTOR RESOLVERS TO BE MORE ORGANIZED
+import Reset from "./ResetMutations";
+
 async function signup(_parent: any, args: SignupValues): Promise<AuthResults> {
   try {
     const password: string = await bcrypt.hash(args.password, 12);
@@ -47,6 +51,7 @@ async function login(_parent: any, args: LoginValues): Promise<AuthResults> {
 export default {
   signup,
   login,
+  ...Reset,
 };
 
 interface SignupValues {
