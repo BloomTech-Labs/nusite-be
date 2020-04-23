@@ -1,4 +1,10 @@
 import Query from "../Query";
+import dbconfig from "../../data/dbconfig";
+
+beforeAll(async done => {
+  await dbconfig.seed.run();
+  done();
+});
 
 describe("Should test main queries", () => {
   test("should get list of users", async () => {

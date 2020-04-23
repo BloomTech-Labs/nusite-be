@@ -1,4 +1,10 @@
 import Mutation from "../MutationResolver";
+import dbconfig from "../../data/dbconfig";
+
+beforeAll(async done => {
+  await dbconfig.seed.run();
+  done();
+});
 
 describe("testing auth mutations", () => {
   test("should test signup mutation", async () => {

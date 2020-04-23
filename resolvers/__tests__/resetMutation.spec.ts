@@ -1,4 +1,10 @@
 import Reset from "../ResetMutations";
+import dbconfig from "../../data/dbconfig";
+
+beforeAll(async done => {
+  await dbconfig.seed.run();
+  done();
+});
 
 describe("Testing reset password", () => {
   test("should test initiateReset mutation", async () => {
