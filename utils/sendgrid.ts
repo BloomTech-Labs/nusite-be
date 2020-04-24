@@ -4,7 +4,7 @@ export const sendgridEmail = async (email: string) => {
   // Get the Sendgrid api key
   sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
-  // let link = process.env.SENDGRID_LINK || 'http://localhost:3000/reset';
+  let link = process.env.SENDGRID_LINK || "http://localhost:3000/reset";
 
   // Set up the message
   const msg = {
@@ -16,7 +16,7 @@ export const sendgridEmail = async (email: string) => {
     <div>
       <h3>If you did not request to reset your password, ignore this email,</h3>
       <h4>Otherwise, click the link below and we can reset your password.</h4>
-      <a href="http://localhost:3000/reset" target="__blank" rel="no-opener noreferrer">Reset Password Now!</a>
+      <a href=${link} target="__blank" rel="no-opener noreferrer">Reset Password Now!</a>
       <p>This was an auto-generated email, please do not respond, thank you.</p>
     </div>
     `,
