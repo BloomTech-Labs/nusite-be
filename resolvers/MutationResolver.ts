@@ -120,9 +120,12 @@ interface UserValues {
 
 interface ProjectValues {
   id: number;
-  project_name: string;
-  project_owner: number;
-  project_developer: number;
+  project_name?: string;
+  project_owner?: number;
+  project_developer?: number;
+  completed?: boolean;
+  marketplace?: boolean;
+  showcase?: boolean;
 }
 
 interface LoginValues {

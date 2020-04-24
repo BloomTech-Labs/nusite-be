@@ -59,6 +59,9 @@ const typeDefs = gql`
       project_name: String
       project_owner: Int
       project_developer: Int
+      completed: Boolean
+      marketplace: Boolean
+      showcase: Boolean
     ): Project
     deleteProject(id: ID!): Project
     updateUser(
