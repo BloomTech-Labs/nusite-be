@@ -1,4 +1,10 @@
 import Mutation from "../MutationResolver";
+import dbconfig from "../../data/dbconfig";
+
+beforeAll(async done => {
+  await dbconfig.seed.run();
+  done();
+});
 
 import dbconfig from "../../data/dbconfig";
 

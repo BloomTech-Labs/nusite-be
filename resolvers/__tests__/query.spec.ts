@@ -30,6 +30,6 @@ describe("Should test main queries", () => {
     const res = await Query.project(null, { id: 1 });
     // should return project with id of 1
     expect(res.id).toBe(1);
-    expect(res.project_name).toMatch(/hospital/i);
+    expect(res.project_name).toMatch(/Hospital/i);
   });
 });
