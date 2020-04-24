@@ -1,12 +1,6 @@
 import { checkUser, resetToken, hashPassword } from "../utils";
 import { sendgridEmail } from "../utils/sendgrid";
 import { User } from "../models/Model";
-import dbconfig from "../data/dbconfig";
-
-beforeAll(async done => {
-  await dbconfig.seed.run();
-  done();
-});
 
 async function initiateReset(_parent: any, args: { email: string }) {
   // Make sure the user exists
