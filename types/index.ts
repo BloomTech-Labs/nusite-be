@@ -53,6 +53,27 @@ const typeDefs = gql`
       email: String!
     ): AuthPayload
     login(email: String!, password: String!): AuthPayload
+    addProject(project_name: String, project_owner: Int): Project
+    updateProject(
+      id: ID!
+      project_name: String
+      project_owner: Int
+      project_developer: Int
+      completed: Boolean
+      marketplace: Boolean
+      showcase: Boolean
+    ): Project
+    deleteProject(id: ID!): Project
+    updateUser(
+      id: ID!
+      username: String
+      first_name: String
+      last_name: String
+      email: String
+      company: String
+      dev_experience: Int
+      dev_education: Int
+    ): User
     # adding a project
     # claiming a project/job
     # update a project
