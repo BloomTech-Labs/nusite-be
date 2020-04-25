@@ -16,9 +16,10 @@ passport.use(
       profile: { id: any; displayName: any },
       done: (arg0: any, arg1: any) => any
     ) => {
-      User.findOrCreate({ googleId: profile.id }, 
-        function(err: any, user: { save: (arg0: (err: any) => any) => void; }) 
-        {
+      User.findOrCreate({ googleId: profile.id }, function(
+        err: any,
+        user: { save: (arg0: (err: any) => any) => void }
+      ) {
         if (err) {
           return done(err, user);
         }
@@ -30,7 +31,7 @@ passport.use(
 
           user.save(function(err) {
             if (err) console.log(err);
-            return done(err, done)
+            return done(err, done);
           });
         } else {
           return done(err, user);

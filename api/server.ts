@@ -33,7 +33,7 @@ app.get(
     scope: [
       "https://www.googleapis.com/auth/userinfo.email",
       "https://www.googleapis.com/auth/userinfo.profile",
-    ]
+    ],
   })
 );
 
@@ -43,9 +43,7 @@ app.get(
     failureRedirect: "/",
   }),
   (req, res) => {
-    return res
-      .status(200),
-    res.redirect("/dashboard");
+    return res.status(200), res.redirect("/dashboard");
   }
 );
 
