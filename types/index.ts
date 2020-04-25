@@ -19,6 +19,7 @@ const typeDefs = gql`
     dev_experience: Int
     dev_education: Int
     projects: [Project]
+    googleId: String
   }
 
   type Project {

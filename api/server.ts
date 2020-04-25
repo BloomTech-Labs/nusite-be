@@ -7,7 +7,6 @@ import resolvers from "../resolvers";
 
 const passportSetup = require("../authconfig/oauth");
 
-
 const app = express();
 
 app.use(passport.initialize());
