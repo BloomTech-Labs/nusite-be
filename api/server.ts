@@ -5,7 +5,6 @@ import passport from "passport";
 import typeDefs from "../types";
 import resolvers from "../resolvers";
 
-const authRoutes = require("../routes/auth-routes");
 const passportSetup = require("../authconfig/oauth");
 
 
@@ -28,8 +27,6 @@ server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 app.use("/", (_req, res) => {
   res.send("Welcome to Partnerd API");
 });
-
-app.use("/auth", authRoutes);
 
 app.get(
   "/auth/google",
