@@ -1,5 +1,4 @@
 import Mutation from "../MutationResolver";
-
 import dbconfig from "../../data/dbconfig";
 
 beforeAll(async done => {

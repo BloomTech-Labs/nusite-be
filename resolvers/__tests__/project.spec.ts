@@ -1,4 +1,10 @@
 import Project from "../ProjectResolver";
+import dbconfig from "../../data/dbconfig";
+
+beforeAll(async done => {
+  await dbconfig.seed.run();
+  done();
+});
 
 describe("Tests for the Project Resolver", () => {
   test("should have a defined Project Owner", async () => {

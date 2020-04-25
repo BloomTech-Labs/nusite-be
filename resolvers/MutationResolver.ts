@@ -3,6 +3,10 @@ import { User } from "../models/Model";
 import { Project } from "../models/Model";
 import generateToken from "../token/generateToken";
 
+// Just for testing THIS WILL BE TEMPORARY AND REFACTORED
+// TODO: REFACTOR RESOLVERS TO BE MORE ORGANIZED
+import Reset from "./ResetMutations";
+
 async function signup(_parent: any, args: SignupValues): Promise<AuthResults> {
   try {
     const password: string = await bcrypt.hash(args.password, 12);
@@ -91,6 +95,7 @@ export default {
   addProject,
   updateProject,
   deleteProject,
+  ...Reset,
 };
 
 interface SignupValues {
@@ -115,9 +120,12 @@ interface UserValues {
 
 interface ProjectValues {
   id: number;
-  project_name: string;
-  project_owner: number;
-  project_developer: number;
+  project_name?: string;
+  project_owner?: number;
+  project_developer?: number;
+  completed?: boolean;
+  marketplace?: boolean;
+  showcase?: boolean;
 }
 
 interface LoginValues {

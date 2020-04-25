@@ -203,13 +203,22 @@ mutation updateProject{
   project_owner {
       id
     }
+}
+    
+    mutation {
+deleteProject(id: 1) {
+    id
+  }
+}
+
+ initiateReset(email: "test@gmail.com"){
+    token
+    message
   }
 }
 
 mutation {
-deleteProject(id: 1) {
-    id
-  }
+  resetPassword(email: "test@gmail.com", password: "test")
 }
 ```
 
