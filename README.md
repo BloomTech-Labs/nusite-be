@@ -39,6 +39,7 @@ With the nature of GraphQL, you will only have one endpoint, with the exception 
 | ------ | ---------- | ------------------------------------- |
 | GET    | `/`        | all users                             | Welcome route to the API |
 | POST   | `/graphql` | graphql endpoint to test your queries |
+| GET    | `/auth/google | Google API login endpoint          |
 
 # Data Model
 
