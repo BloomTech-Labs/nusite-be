@@ -190,7 +190,28 @@ mutation {
 }
 
 mutation {
-  initiateReset(email: "test@gmail.com"){
+ addProject (project_name: "TestingTestsTester" project_owner:1) {
+   id
+  project_name
+  }
+}
+
+mutation updateProject{
+ updateProject (id:4 project_name: "UpdateTestsTesting!!" project_owner:2) {
+   id
+  project_name
+  project_owner {
+      id
+    }
+}
+    
+    mutation {
+deleteProject(id: 1) {
+    id
+  }
+}
+
+ initiateReset(email: "test@gmail.com"){
     token
     message
   }
