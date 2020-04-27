@@ -1,7 +1,6 @@
 import passport from "passport";
 import { User } from "../models/Model";
 import { hash } from "bcryptjs";
-import generateToken from "../token/generateToken";
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
 
 passport.use(
@@ -32,10 +31,9 @@ passport.use(
             password: pw,
           };
 
-          const [user]: any = await User.add(newUser);
-          const token = await generateToken(user);
+          const [{ password, ...user }]: any = await User.add(newUser);
 
-          return done(null, { user, token });
+          return done(null, user);
         } else {
           return done(null, findUser);
         }
@@ -43,5 +41,3 @@ passport.use(
     }
   )
 );
-
-export default LinkedInStrategy;

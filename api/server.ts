@@ -4,7 +4,7 @@ import passport from "passport";
 import typeDefs from "../types";
 import resolvers from "../resolvers";
 
-const strategy = require("../authconfig/linkedin");
+import "../authconfig/linkedin";
 
 const app = express();
 app.use(passport.initialize());
@@ -20,7 +20,7 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 
-app.get("/auth/linkedin", passport.authenticate("linkedin"), () => {});
+app.get("/auth/linkedin", passport.authenticate("linkedin"));
 
 app.get(
   "/auth/linkedin/callback",
