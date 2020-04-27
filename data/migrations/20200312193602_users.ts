@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<any> {
       .unique();
     table.string("first_name", 50).notNullable();
     table.string("last_name", 50).notNullable();
-    table.string("company", 50).unique();
+    table.string("company", 50);
     table
       .string("password", 255)
       .notNullable()
