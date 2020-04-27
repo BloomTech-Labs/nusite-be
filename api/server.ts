@@ -27,6 +27,7 @@ app.get(
   passport.authenticate("linkedin", {
     successRedirect: "/dashboard",
     failureRedirect: "/login",
+    session: false,
   })
 );
 

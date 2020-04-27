@@ -1,6 +1,7 @@
 import passport from "passport";
 import { User } from "../models/Model";
-import { hashSync, hash } from "bcryptjs";
+import { hash } from "bcryptjs";
+import generateToken from "../token/generateToken";
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
 
 passport.use(
@@ -11,7 +12,7 @@ passport.use(
       callbackURL: "http://127.0.0.1:4000/auth/linkedin/callback",
       scope: ["r_emailaddress", "r_liteprofile"],
     },
-    (accessToken: string, refreshToken: string, profile: any, done: any) => {
+    (_accessToken: string, _refreshToken: string, profile: any, done: any) => {
       // asynchronous verification, for effect...
       process.nextTick(async function() {
         // To keep the example simple, the user's LinkedIn profile is returned to
@@ -32,9 +33,10 @@ passport.use(
           };
 
           const [user]: any = await User.add(newUser);
-          return done(null, user);
+          const token = await generateToken(user);
+
+          return done(null, { user, token });
         } else {
-          console.log(findUser);
           return done(null, findUser);
         }
       });
