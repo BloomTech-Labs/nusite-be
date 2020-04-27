@@ -1,5 +1,6 @@
 import passport from "passport";
 import { User } from "../models/Model";
+import { hashSync, hash } from "bcryptjs";
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
 
 passport.use(
@@ -20,17 +21,20 @@ passport.use(
         const findUser = await User.findBy({ email: profile.emails[0].value });
 
         if (!findUser) {
-          const user = {
+          const pw = await hash(profile.displayName, 12);
+
+          const newUser = {
             username: profile.displayName,
             first_name: profile.name.givenName,
             last_name: profile.name.familyName,
             email: profile.emails[0].value,
-            password: profile.givenName + profile.familyName,
+            password: pw,
           };
 
-          await User.add(user);
+          const [user]: any = await User.add(newUser);
           return done(null, user);
         } else {
+          console.log(findUser);
           return done(null, findUser);
         }
       });
