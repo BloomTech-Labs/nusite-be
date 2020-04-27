@@ -20,10 +20,6 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 
-// app.use("/", (_req, res) => {
-//   res.send("Welcome to Partnerd API");
-// });
-
 app.get("/auth/linkedin", passport.authenticate("linkedin"), () => {});
 
 app.get(
@@ -33,5 +29,9 @@ app.get(
     failureRedirect: "/login",
   })
 );
+
+app.use("/", (_req, res) => {
+  res.send("Welcome to Partnerd API");
+});
 
 export default app;

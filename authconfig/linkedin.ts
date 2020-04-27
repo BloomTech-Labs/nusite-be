@@ -12,12 +12,12 @@ passport.use(
     },
     (accessToken: string, refreshToken: string, profile: any, done: any) => {
       // asynchronous verification, for effect...
-      process.nextTick(function() {
+      process.nextTick(async function() {
         // To keep the example simple, the user's LinkedIn profile is returned to
         // represent the logged-in user. In a typical application, you would want
         // to associate the LinkedIn account with a user record in your database,
         // and return that user instead.
-        const findUser = User.findBy({ email: profile.emails[0].value });
+        const findUser = await User.findBy({ email: profile.emails[0].value });
 
         if (!findUser) {
           const user = {
@@ -28,7 +28,7 @@ passport.use(
             password: profile.givenName + profile.familyName,
           };
 
-          User.add(user);
+          await User.add(user);
           return done(null, user);
         } else {
           return done(null, findUser);
