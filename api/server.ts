@@ -24,16 +24,21 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 
-app.get("/auth/linkedin", passport.authenticate("linkedin"));
+app.get(
+  "/auth/linkedin",
+  passport.authenticate("linkedin", { passReqToCallback: true })
+);
 
 app.get(
   "/auth/linkedin/callback",
   passport.authenticate("linkedin", {
     // successRedirect: "/dashboard",
+    passReqToCallback: true,
     failureRedirect: "/login",
     session: false,
   }),
   (req, res) => {
+    console.log(req.user);
     let user = {
       id: 0,
       username: "",
