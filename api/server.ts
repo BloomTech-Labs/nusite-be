@@ -1,12 +1,15 @@
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
+import { buildContext } from "graphql-passport";
 import passport from "passport";
 import typeDefs from "../types";
 import resolvers from "../resolvers";
 
 import "../authconfig/linkedin";
+import generateToken from "../token/generateToken";
 
 const app = express();
+
 app.use(passport.initialize());
 
 const server = new ApolloServer({
@@ -16,6 +19,7 @@ const server = new ApolloServer({
   // Will not allow in the production deploy
   introspection: process.env.NODE_ENV !== "production",
   playground: process.env.NODE_ENV !== "production",
+  context: ({ req, res }) => buildContext({ req, res }),
 });
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
@@ -25,10 +29,18 @@ app.get("/auth/linkedin", passport.authenticate("linkedin"));
 app.get(
   "/auth/linkedin/callback",
   passport.authenticate("linkedin", {
-    successRedirect: "/dashboard",
+    // successRedirect: "/dashboard",
     failureRedirect: "/login",
     session: false,
-  })
+  }),
+  (req, res) => {
+    let user = {
+      id: 0,
+      username: "",
+    };
+    const token = generateToken(user);
+    res.status(200).json(token);
+  }
 );
 
 app.use("/", (_req, res) => {
