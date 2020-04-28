@@ -8,7 +8,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: "/auth/google/redirect",
+      callbackURL: "http://127.0.0.1:3000/auth/google/redirect",
     },
     (
       accessToken: any,
