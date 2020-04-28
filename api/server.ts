@@ -6,7 +6,7 @@ import typeDefs from "../types";
 import resolvers from "../resolvers";
 
 import "../authconfig/linkedin";
-import generateToken from "../token/generateToken";
+const router = require("./linkedin");
 
 const app = express();
 
@@ -24,26 +24,7 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 
-app.get("/auth/linkedin", passport.authenticate("linkedin"));
-
-app.get(
-  "/auth/linkedin/callback",
-  passport.authenticate("linkedin", {
-    // successRedirect: "/dashboard",
-    passReqToCallback: true,
-    failureRedirect: "/login",
-    session: false,
-  }),
-  (req, res) => {
-    console.log(req.user);
-    let user = {
-      id: 0,
-      username: "",
-    };
-    const token = generateToken(user);
-    res.status(200).json(token);
-  }
-);
+app.use("/", router);
 
 app.use("/", (_req, res) => {
   res.send("Welcome to Partnerd API");
