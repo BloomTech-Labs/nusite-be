@@ -6,6 +6,8 @@ import typeDefs from "../types";
 import resolvers from "../resolvers";
 
 const passportSetup = require("../authconfig/oauth");
+import "../authconfig/linkedin";
+const linkedIn = require("../routes/linkedin");
 
 const app = express();
 
@@ -22,6 +24,8 @@ const server = new ApolloServer({
 });
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
+
+app.use("/", linkedIn);
 
 app.use("/", (_req, res) => {
   res.send("Welcome to Partnerd API");

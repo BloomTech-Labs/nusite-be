@@ -41,6 +41,12 @@ With the nature of GraphQL, you will only have one endpoint, with the exception 
 | POST   | `/graphql` | graphql endpoint to test your queries |
 | GET    | `/auth/google | Google API login endpoint          |
 
+| Method | Endpoint         | Description                           |
+| ------ | ---------------- | ------------------------------------- |
+| GET    | `/`              | all users                             | Welcome route to the API |
+| POST   | `/graphql`       | graphql endpoint to test your queries |
+| GET    | `/auth/linkedin` | LinkedIn login endpoint               |
+
 # Data Model
 
 #### USERS
@@ -205,7 +211,7 @@ mutation updateProject{
       id
     }
 }
-    
+
     mutation {
 deleteProject(id: 1) {
     id
