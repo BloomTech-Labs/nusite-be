@@ -1,7 +1,6 @@
+import passport from "passport";
 const User = require("../models/Model");
-
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 passport.use(
   new GoogleStrategy(
@@ -11,14 +10,15 @@ passport.use(
       callbackURL: "/auth/google/redirect",
     },
     (
-      accessToken: any,
-      refreshToken: any,
-      profile: { id: any; displayName: any },
-      done: (arg0: any, arg1: any) => any
+      _accessToken: any,
+      _refreshToken: any,
+      profile: { googleid: any; displayName: any },
+      done: any
     ) => {
-      User.findOrCreate({ googleId: profile.id }, 
-        function(err: any, user: { save: (arg0: (err: any) => any) => void; }) 
-        {
+      User.findOrCreate({ googleId: profile.googleid }, function(
+        err: any,
+        user: { save: (arg0: (err: any) => any) => void }
+      ) {
         if (err) {
           return done(err, user);
         }
@@ -30,7 +30,7 @@ passport.use(
 
           user.save(function(err) {
             if (err) console.log(err);
-            return done(err, done)
+            return done(err, done);
           });
         } else {
           return done(err, user);

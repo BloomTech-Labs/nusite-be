@@ -5,7 +5,9 @@ import passport from "passport";
 import typeDefs from "../types";
 import resolvers from "../resolvers";
 
-const passportSetup = require("../authconfig/oauth");
+import "../authconfig/google";
+const google = require("../routes/google");
+
 import "../authconfig/linkedin";
 const linkedIn = require("../routes/linkedin");
 
@@ -27,30 +29,10 @@ server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 
 app.use("/", linkedIn);
 
+app.use("/", google);
+
 app.use("/", (_req, res) => {
   res.send("Welcome to Partnerd API");
 });
-
-app.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: [
-      "https://www.googleapis.com/auth/userinfo.email",
-      "https://www.googleapis.com/auth/userinfo.profile",
-    ]
-  })
-);
-
-app.get(
-  "/auth/google/redirect",
-  passport.authenticate("google", {
-    failureRedirect: "/",
-  }),
-  (req, res) => {
-    return res
-      .status(200),
-    res.redirect("/dashboard");
-  }
-);
 
 export default app;
