@@ -30,6 +30,7 @@ passport.use(
           last_name: "Please Update",
           email: `pleaseUpdate@fillerEmail.com`,
           password: pw,
+          auth_id: profile.id,
         };
 
         const [{ password, ...user }]: any = await User.add(newUser);
