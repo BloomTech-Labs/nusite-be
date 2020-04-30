@@ -28,7 +28,7 @@ passport.use(
           username: profile.displayName,
           first_name: "Please Update",
           last_name: "Please Update",
-          email: `${profile.displayName}@fillerEmail.com`,
+          email: `pleaseUpdate@fillerEmail.com`,
           password: pw,
         };
 
