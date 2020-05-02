@@ -20,7 +20,7 @@ export async function up(knex: Knex): Promise<any> {
       .unique();
     table.integer("dev_experience");
     table.integer("dev_education");
-    table.string("google_id").unique();
+    table.string("auth_id").unique();
   });
 }
 
