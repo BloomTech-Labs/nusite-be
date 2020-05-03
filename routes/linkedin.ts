@@ -21,7 +21,10 @@ linkedinRouter.get(
       username: req.user.username,
     };
     const token = generateToken(user);
-    res.status(200).json({ token, user });
+    res
+      .status(200)
+      .cookie("jwt", { token, user }, { httpOnly: true })
+      .redirect("/dashboard");
   }
 );
 
