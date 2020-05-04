@@ -15,16 +15,14 @@ linkedinRouter.get(
     failureRedirect: "/login",
     session: false,
   }),
-  (req: { user: { id: number; username: string } }, res: any) => {
+  (req: { user: { id: number; username: string }; headers: any }, res: any) => {
     let user = {
       id: req.user.id,
       username: req.user.username,
     };
     const token = generateToken(user);
-    res
-      .status(200)
-      .cookie("jwt", { token, user }, { httpOnly: true })
-      .redirect("/dashboard");
+
+    res.status(200).json({ token, user });
   }
 );
 
