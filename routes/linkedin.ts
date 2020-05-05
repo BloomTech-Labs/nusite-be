@@ -16,7 +16,7 @@ linkedinRouter.get(
       id: req.user.id,
       username: req.user.username,
     };
-    
+
     res
       .status(200)
       .cookie("JWT", generateToken(user), { httpOnly: true })
