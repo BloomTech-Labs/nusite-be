@@ -2,14 +2,14 @@ const googleRouter = require("express").Router();
 import passport from "passport";
 import generateToken from "../token/generateToken";
 
-googleRouter.get("/auth/facebook", passport.authenticate("facebook"));
+googleRouter.get("/api/auth/facebook", passport.authenticate("facebook"));
 
 // Initial passport route calls this route
 // controls creation of token for the frontend
 // Frontend will need to redirect themselves once they save the token and user
 // will need thoroghly checked with the frontend
 googleRouter.get(
-  "/auth/facebook/callback",
+  "/api/auth/facebook/callback",
   passport.authenticate("facebook", {
     passReqToCallback: true,
     failureRedirect: "/login",
@@ -20,8 +20,11 @@ googleRouter.get(
       id: req.user.id,
       username: req.user.displayName,
     };
-    const token = generateToken(user);
-    res.status(200).json({ token, user });
+
+    res
+      .status(200)
+      .cookie("JWT", generateToken(user), { httpOnly: true })
+      .redirect("/home");
   }
 );
 
