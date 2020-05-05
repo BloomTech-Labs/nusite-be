@@ -1,41 +1,35 @@
 import passport from "passport";
-const User = require("../models/Model");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const { User } = require("../models/Model");
+const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: "/auth/google/redirect",
+      callbackURL: "/auth/google/redirect/",
     },
     (
       _accessToken: any,
       _refreshToken: any,
-      profile: { googleid: any; displayName: any },
+      profile: { id: any; username: any },
       done: any
     ) => {
-      User.findOrCreate({ googleId: profile.googleid }, function(
-        err: any,
-        user: { save: (arg0: (err: any) => any) => void }
-      ) {
-        if (err) {
-          return done(err, user);
-        }
-        if (!user) {
-          user = new User({
-            name: profile.displayName,
-            provider: "google",
-          });
-
-          user.save(function(err) {
-            if (err) console.log(err);
-            return done(err, done);
-          });
+      // save the user here
+      // console.log(accessToken);
+      // console.log("passport callback function fired:");
+      console.log("PROFILE", profile);
+      User.findUserById(profile.id).then((id: any) => {
+        if (id) {
+          return done(null, profile);
         } else {
-          return done(err, user);
+          User.createUser(profile.id, profile.username).then(function(id: any) {
+            return done(null, profile);
+          });
         }
       });
     }
   )
 );
+
+module.exports = passport;
