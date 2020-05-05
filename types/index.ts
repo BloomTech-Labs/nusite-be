@@ -8,7 +8,6 @@ const typeDefs = gql`
     username(username: String): User
     userEmail(email: String): User
     project(id: ID!): Project
-    # myProfile(id: ID): User
   }
 
   type User {

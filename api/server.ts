@@ -26,7 +26,9 @@ const server = new ApolloServer({
 });
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
+
 app.use(cookieParser());
+
 app.use("/", linkedIn);
 app.use("/", facebook);
 
