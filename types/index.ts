@@ -4,10 +4,11 @@ const typeDefs = gql`
   type Query {
     users: [User]!
     projects: [Project]
-    user(id: ID!): User
+    user(id: ID): User
     username(username: String): User
     userEmail(email: String): User
     project(id: ID!): Project
+    # myProfile(id: ID): User
   }
 
   type User {
