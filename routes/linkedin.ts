@@ -15,13 +15,15 @@ router.get(
     failureRedirect: "/login",
     session: false,
   }),
-  (req: { user: { id: number; username: string } }, res: any) => {
+  (req: { user: { id: number; username: string }; headers: any }, res: any) => {
     let user = {
       id: req.user.id,
       username: req.user.username,
     };
     const token = sign(user, process.env.JWT_SECRET, { expiresIn: "1d" });
-    res.status(200).json({ token, user });
+    req.headers.authorization = `JWT ${token}`;
+
+    res.status(200).redirect("/dashboard");
   }
 );
 
