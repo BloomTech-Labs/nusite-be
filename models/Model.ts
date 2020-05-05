@@ -41,10 +41,14 @@ class Model {
       .del();
   }
 
-  findOrCreate(googleid: any) {
+  findUserById(id: any) {
     return db(this.tablename)
-      .where({ googleid })
+      .where({ auth_id: id })
       .first();
+  }
+
+  createUser(id: any) {
+    return db(this.tablename).insert({ auth_id: id });
   }
 }
 
