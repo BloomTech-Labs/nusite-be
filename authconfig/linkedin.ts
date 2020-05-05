@@ -8,7 +8,7 @@ passport.use(
     {
       clientID: process.env.LINKEDIN_ID,
       clientSecret: process.env.LINKEDIN_SECRET,
-      callbackURL: "http://127.0.0.1:4000/auth/linkedin/callback",
+      callbackURL: process.env.LINKEDIN_CALLBACK_URL,
       scope: ["r_emailaddress", "r_liteprofile"],
     },
     (_accessToken: string, _refreshToken: string, profile: any, done: any) => {
