@@ -1,29 +1,32 @@
 const gRouter = require("express").Router();
-const gPassport = require("passport");
-const { gLog } = require("jsonwebtoken");
+import passport from "passport";
+import generateToken from "../token/generateToken";
 
 gRouter.get(
   "/auth/google",
-  gPassport.authenticate("google", {
+  passport.authenticate("google", {
     scope: [
       "https://www.googleapis.com/auth/userinfo.email",
       "https://www.googleapis.com/auth/userinfo.profile",
-    ]
+    ],
   })
 );
 
 gRouter.get(
-  "/auth/google/redirect",
-  gPassport.authenticate("google", {
-    failureRedirect: "/",
+  "/auth/google/redirect/",
+  passport.authenticate("google", {
+    passReqToCallback: true,
+    failureRedirect: "/login",
     session: false,
   }),
-  (req: {user: { googleid: string }}, res: any) => {
+  (req: { user: { id: number; displayName: string } }, res: any) => {
     let user = {
-      googleid: req.user.googleid,
+      id: req.user.id,
+      username: req.user.displayName,
     };
-    const token = gLog(user, process.env.JWT_SECRET, { expiresIn: "1d"});
-    res.status(200).json({ token, user }).redirect("/dashboard");
+    const token = generateToken(user);
+    console.log("User: ", user);
+    res.status(200).json({ token, user });
   }
 );
 
