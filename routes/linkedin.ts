@@ -9,7 +9,7 @@ router.get("/api/auth/linkedin", passport.authenticate("linkedin"));
 // Frontend will need to redirect themselves once they save the token and user
 // will need thoroghly checked with the frontend
 router.get(
-  "/api/auth/linkedin/callback",
+  "/dashboard",
   passport.authenticate("linkedin", {
     passReqToCallback: true,
     failureRedirect: "/login",
