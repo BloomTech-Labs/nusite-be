@@ -1,14 +1,10 @@
-const router = require("express").Router();
-const passport = require("passport");
-const { sign } = require("jsonwebtoken");
+const linkedinRouter = require("express").Router();
+import passport from "passport";
+import generateToken from "../token/generateToken";
 
-router.get("/api/auth/linkedin", passport.authenticate("linkedin"));
+linkedinRouter.get("/api/auth/linkedin", passport.authenticate("linkedin"));
 
-// Initial passport route calls this route
-// controls creation of token for the frontend
-// Frontend will need to redirect themselves once they save the token and user
-// will need thoroghly checked with the frontend
-router.get(
+linkedinRouter.get(
   "/api/auth/linkedin/callback",
   passport.authenticate("linkedin", {
     passReqToCallback: true,
@@ -20,11 +16,12 @@ router.get(
       id: req.user.id,
       username: req.user.username,
     };
-    const token = sign(user, process.env.JWT_SECRET, { expiresIn: "1d" });
-    req.headers.authorization = `JWT ${token}`;
 
-    res.status(200).redirect("/home");
+    res
+      .status(200)
+      .cookie("JWT", generateToken(user), { httpOnly: true })
+      .redirect("/home");
   }
 );
 
-module.exports = router;
+module.exports = linkedinRouter;

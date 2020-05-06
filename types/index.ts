@@ -4,7 +4,7 @@ const typeDefs = gql`
   type Query {
     users: [User]!
     projects: [Project]
-    user(id: ID!): User
+    user(id: ID): User
     username(username: String): User
     userEmail(email: String): User
     project(id: ID!): Project
@@ -51,6 +51,7 @@ const typeDefs = gql`
       last_name: String!
       password: String!
       email: String!
+      auth_id: ID
     ): AuthPayload
     login(email: String!, password: String!): AuthPayload
     addProject(project_name: String, project_owner: Int): Project

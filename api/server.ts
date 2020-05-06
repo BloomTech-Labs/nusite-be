@@ -4,9 +4,12 @@ import { buildContext } from "graphql-passport";
 import passport from "passport";
 import typeDefs from "../types";
 import resolvers from "../resolvers";
+import cookieParser from "cookie-parser";
 
 import "../authconfig/linkedin";
+import "../authconfig/facebook";
 const linkedIn = require("../routes/linkedin");
+const facebook = require("../routes/facebook");
 
 const app = express();
 
@@ -24,7 +27,10 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 
+app.use(cookieParser());
+
 app.use("/", linkedIn);
+app.use("/", facebook);
 
 app.use("/", (_req, res) => {
   res.send("Welcome to Partnerd API");
