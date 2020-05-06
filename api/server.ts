@@ -6,6 +6,9 @@ import typeDefs from "../types";
 import resolvers from "../resolvers";
 import cookieParser from "cookie-parser";
 
+import "../authconfig/google";
+const google = require("../routes/google");
+
 import "../authconfig/linkedin";
 import "../authconfig/facebook";
 const linkedIn = require("../routes/linkedin");
@@ -31,6 +34,8 @@ app.use(cookieParser());
 
 app.use("/", linkedIn);
 app.use("/", facebook);
+
+app.use("/", google);
 
 app.use("/", (_req, res) => {
   res.send("Welcome to Partnerd API");
