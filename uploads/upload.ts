@@ -1,7 +1,7 @@
 const upload = require("express").Router();
 const express = require("express");
 const dotenv = require("dotenv");
-// import Project from '../models/Model'
+import { Project } from "../models/Model";
 
 dotenv.config();
 
@@ -26,15 +26,20 @@ const storage = multer.diskStorage({
   },
 });
 //POST ROUTE
-upload.post(
-  "/upload",
+upload.put(
+  "/upload/:id",
   (
-    req: { file: { path: any } },
+    req: {
+      file: { path: any; secure_url: any };
+      params: { id: any; project_avatar: any };
+      body: any;
+    },
     res: { send: (arg0: any) => any; json: (arg0: any) => void },
     next: any
   ) => {
     const upload = multer({ storage }).single("picture");
     upload(req, res, function(err: any) {
+      const { id, project_avatar } = req.params;
       if (err) {
         return res.send(err);
       }
@@ -50,7 +55,7 @@ upload.post(
         api_secret: process.env.CLOUDINARY_API_SECRET,
       });
 
-      const path = req.file.path;
+      const { path, secure_url } = req.file;
       const uniqueFilename = new Date().toISOString();
 
       cloudinary.uploader.upload(
@@ -60,6 +65,17 @@ upload.post(
           if (err) {
             return res.send(err);
           } else {
+            Project.findById(id).then(project => {
+              if (project) {
+                Project.update(id, { project_avatar: image.secure_url }).then(
+                  update => {
+                    console.log(update);
+                    return update;
+                  }
+                );
+              }
+            });
+            console.log(image.secure_url, "SU");
             console.log("file uploaded to Cloudinary");
           }
 
