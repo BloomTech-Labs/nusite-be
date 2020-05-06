@@ -3,7 +3,7 @@ import passport from "passport";
 import generateToken from "../token/generateToken";
 
 gRouter.get(
-  "/auth/google",
+  "/api/auth/google",
   passport.authenticate("google", {
     scope: [
       "https://www.googleapis.com/auth/userinfo.email",
@@ -13,20 +13,21 @@ gRouter.get(
 );
 
 gRouter.get(
-  "/auth/google/redirect/",
+  "/api/auth/google/redirect/",
   passport.authenticate("google", {
     passReqToCallback: true,
     failureRedirect: "/login",
     session: false,
   }),
-  (req: { user: { id: number; displayName: string } }, res: any) => {
+  (req: { user: { id: number; username: string } }, res: any) => {
     let user = {
       id: req.user.id,
-      username: req.user.displayName,
+      username: req.user.username,
     };
-    const token = generateToken(user);
-    console.log("User: ", user);
-    res.status(200).json({ token, user });
+    res
+      .status(200)
+      .cookie("JWT", generateToken(user), { httpOnly: true })
+      .redirect("/home");
   }
 );
 

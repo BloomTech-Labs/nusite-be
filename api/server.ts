@@ -35,24 +35,4 @@ app.use("/", (_req, res) => {
   res.send("Welcome to Partnerd API");
 });
 
-app.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: [
-      "https://www.googleapis.com/auth/userinfo.email",
-      "https://www.googleapis.com/auth/userinfo.profile",
-    ],
-  })
-);
-
-app.get(
-  "/auth/google/redirect",
-  passport.authenticate("google", {
-    failureRedirect: "/",
-  }),
-  (req, res) => {
-    return res.status(200), res.redirect("/dashboard");
-  }
-);
-
 export default app;
