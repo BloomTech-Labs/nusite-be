@@ -1,4 +1,5 @@
 import passport from "passport";
+import { hashSync } from "bcryptjs";
 const { User } = require("../models/Model");
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 
@@ -12,19 +13,26 @@ passport.use(
     (
       _accessToken: any,
       _refreshToken: any,
-      profile: { id: any; username: any },
+      profile: { id: any; displayName: any; name: any; emails: any },
       done: any
     ) => {
-      // save the user here
-      // console.log(accessToken);
-      // console.log("passport callback function fired:");
-      console.log("PROFILE", profile);
       User.findUserById(profile.id).then((id: any) => {
         if (id) {
-          return done(null, profile);
+          return done(null, id);
         } else {
-          User.createUser(profile.id, profile.username).then(function(id: any) {
-            return done(null, profile);
+          const pw = hashSync(profile.displayName, 12);
+
+          const user = {
+            auth_id: id,
+            username: profile.displayName,
+            first_name: profile.name.givenName,
+            last_name: profile.name.familyName,
+            email: profile.emails[0].value,
+            password: pw,
+          };
+
+          User.createUser(user).then(function(id: any) {
+            return done(null, user);
           });
         }
       });

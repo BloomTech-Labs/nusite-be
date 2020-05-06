@@ -47,8 +47,8 @@ class Model {
       .first();
   }
 
-  createUser(id: any) {
-    return db(this.tablename).insert({ auth_id: id });
+  createUser(user: any) {
+    return db(this.tablename).insert(user);
   }
 }
 
