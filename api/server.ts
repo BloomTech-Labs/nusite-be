@@ -4,10 +4,15 @@ import { buildContext } from "graphql-passport";
 import passport from "passport";
 import typeDefs from "../types";
 import resolvers from "../resolvers";
+import cookieParser from "cookie-parser";
+
+import "../authconfig/google";
+const google = require("../routes/google");
 
 import "../authconfig/linkedin";
 
 const linkedIn = require("../routes/linkedin");
+const facebook = require("../routes/facebook");
 const uploader = require("../uploads/upload");
 
 const app = express();
@@ -26,7 +31,14 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: { origin: "*", credentials: true } });
 
+app.use(cookieParser());
+
 app.use("/", linkedIn);
+
+app.use("/", facebook);
+
+app.use("/", google);
+
 app.use("/", uploader);
 
 app.use("/", (_req, res) => {

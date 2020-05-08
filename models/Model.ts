@@ -40,6 +40,16 @@ class Model {
       .where({ id })
       .del();
   }
+
+  findUserById(id: any) {
+    return db(this.tablename)
+      .where({ auth_id: id })
+      .first();
+  }
+
+  createUser(user: any) {
+    return db(this.tablename).insert(user);
+  }
 }
 
 class ProjectModel extends Model {
