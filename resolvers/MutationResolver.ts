@@ -7,6 +7,7 @@ import { sendgridVerify } from "../utils/sendgrid";
 // Just for testing THIS WILL BE TEMPORARY AND REFACTORED
 // TODO: REFACTOR RESOLVERS TO BE MORE ORGANIZED
 import Reset from "./ResetMutations";
+import Verify from "./VerifyResolver";
 
 async function signup(_parent: any, args: SignupValues): Promise<AuthResults> {
   try {
@@ -99,6 +100,7 @@ export default {
   updateProject,
   deleteProject,
   ...Reset,
+  ...Verify,
 };
 
 interface SignupValues {
