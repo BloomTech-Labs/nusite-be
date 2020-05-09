@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { User } from "../models/Model";
 import { Project } from "../models/Model";
 import generateToken from "../token/generateToken";
+import { sendgridVerify } from "../utils/sendgrid";
 
 // Just for testing THIS WILL BE TEMPORARY AND REFACTORED
 // TODO: REFACTOR RESOLVERS TO BE MORE ORGANIZED
@@ -12,6 +13,8 @@ async function signup(_parent: any, args: SignupValues): Promise<AuthResults> {
     const password: string = await bcrypt.hash(args.password, 12);
     const [user] = await User.add({ ...args, password });
     const token: string = await generateToken(user);
+
+    await sendgridVerify(user.email);
 
     return {
       token,
