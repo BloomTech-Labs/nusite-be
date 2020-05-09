@@ -17,4 +17,4 @@ async function verifyUser(_parent: any, args: { email: string }) {
   };
 }
 
-export default verifyUser;
+export default { verifyUser };
