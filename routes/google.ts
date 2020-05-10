@@ -3,7 +3,7 @@ import passport from "passport";
 import generateToken from "../token/generateToken";
 
 gRouter.get(
-  "/api/auth/google",
+  "/api/auth/google/",
   passport.authenticate("google", {
     scope: [
       "https://www.googleapis.com/auth/userinfo.email",
