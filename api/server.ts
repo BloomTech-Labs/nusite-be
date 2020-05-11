@@ -7,10 +7,9 @@ import resolvers from "../resolvers";
 import cookieParser from "cookie-parser";
 
 import "../authconfig/google";
-const google = require("../routes/google");
-
 import "../authconfig/linkedin";
 import "../authconfig/facebook";
+const google = require("../routes/google");
 const linkedIn = require("../routes/linkedin");
 const facebook = require("../routes/facebook");
 
@@ -34,7 +33,6 @@ app.use(cookieParser());
 
 app.use("/", linkedIn);
 app.use("/", facebook);
-
 app.use("/", google);
 
 app.use("/", (_req, res) => {
