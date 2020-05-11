@@ -7,10 +7,9 @@ import resolvers from "../resolvers";
 import cookieParser from "cookie-parser";
 
 import "../authconfig/google";
-const google = require("../routes/google");
-
 import "../authconfig/linkedin";
 
+const google = require("../routes/google");
 const linkedIn = require("../routes/linkedin");
 const facebook = require("../routes/facebook");
 const uploader = require("../uploads/upload");
