@@ -22,6 +22,7 @@ passport.use(
   }, (_accessToken: string, _refreshToken: string, profile: any, done: any) => {
     process.nextTick(function () {
       console.log("GH PROFILE", profile)
+      done(null, {});
     //   const findUser = User.findBy({
     //     email: profile.emails[0].valuve
     //   });

@@ -9,21 +9,22 @@ ghRouter.get('/api/auth/github',
 );
 
 ghRouter.get("/api/auth/github/callback", 
-  passport.authenticate("github", {
-    passReqToCallback: true,
-    failureRedirect: "/login",
-    session: false,
+  passport.authenticate("github", function(req, res) {
+    console.log(req.user);
+    // passReqToCallback: true,
+    // failureRedirect: "/login",
+    // session: false,
   }),
-  (req: {user: {id: number; username: string } }, res: any) => {
-    let user = {
-      id: req.user.id,
-      username: req.user.username,
-    };
+  // (req: {user: {id: number; username: string } }, res: any) => {
+  //   let user = {
+  //     id: req.user.id,
+  //     username: req.user.username,
+  //   };
 
-    res.status(200).cookie("JWT", generateToken(user), {
-      httpOnly: true
-    }).redirect("/home");
-  }
+  //   res.status(200).cookie("JWT", generateToken(user), {
+  //     httpOnly: true
+  //   }).redirect("/home");
+  // }
 );
 
 module.exports = ghRouter;
