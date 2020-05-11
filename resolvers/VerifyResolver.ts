@@ -12,9 +12,7 @@ async function verifyUser(_parent: any, args: { email: string }) {
   await User.update(user.id, { verified: true });
 
   // return the token and a message for completion
-  return {
-    token,
-  };
+  return token;
 }
 
 export default { verifyUser };
