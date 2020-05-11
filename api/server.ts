@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 
 import "../authconfig/google";
 import "../authconfig/linkedin";
+import "../authconfig/facebook";
 
 const google = require("../routes/google");
 const linkedIn = require("../routes/linkedin");

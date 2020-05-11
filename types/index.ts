@@ -88,6 +88,7 @@ const typeDefs = gql`
     initiateReset(email: String!): ResetPayload
     # Check the token, if good save the new password
     resetPassword(email: String!, password: String!): String
+    verifyUser(email: String!): String
   }
 `;
 
