@@ -42,9 +42,9 @@ export const sendgridVerify = async (email: string) => {
     text: "If you did not request this reset please delete this message.",
     html: `
     <div>
-      <h3>If you did utilizer Partnerd.dev, ignore this email,</h3>
+      <h3>If you did utilize Partnerd.dev, ignore this email,</h3>
       <h4>Otherwise, click the link below and we can verify your email.</h4>
-      <a href=${link} target="__blank" rel="no-opener noreferrer">Reset Password Now!</a>
+      <a href=${link} target="__blank" rel="no-opener noreferrer">Verify Email!</a>
       <p>This was an auto-generated email, please do not respond, thank you.</p>
     </div>
     `,
