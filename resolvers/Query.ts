@@ -13,7 +13,7 @@ function user(_parent: any, args: { id: number }, context: any) {
   if (args.id) {
     return User.findById(args.id);
   } else {
-    let token = context.req.headers.cookie.split("=")[1];
+    let token = context.req.headers.cookie.split(" ")[2].split("=")[1];
     let loggedInUser: any = jwt.decode(token);
     return User.findById(loggedInUser.subject);
   }
