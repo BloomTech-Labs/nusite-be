@@ -42,8 +42,6 @@ describe("testing auth mutations", () => {
       password: "testing update",
       email: "testing update@testing.com",
       company: "testing update",
-      dev_experience: 1,
-      dev_education: 2,
     };
 
     const res = await Mutation.updateUser({ id: 1 }, user);
