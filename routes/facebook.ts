@@ -19,7 +19,7 @@ facebookRouter.get(
 
     res
       .status(200)
-      .cookie("JWT", generateToken(user), { httpOnly: true })
+      .cookie("JWT", generateToken(user), { httpOnly: false })
       .redirect(process.env.REDIRECT_URL);
   }
 );
