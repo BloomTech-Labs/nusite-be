@@ -119,8 +119,8 @@ interface UserValues {
   password?: string;
   email?: string;
   company?: string;
-  dev_experience?: number;
-  dev_education?: number;
+  dev_experience?: string;
+  dev_education?: string;
 }
 
 interface ProjectValues {
