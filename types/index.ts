@@ -17,8 +17,8 @@ const typeDefs = gql`
     last_name: String!
     email: String!
     company: String
-    dev_experience: Int
-    dev_education: Int
+    dev_experience: String
+    dev_education: String
     projects: [Project]
     googleId: String
   }
@@ -73,8 +73,8 @@ const typeDefs = gql`
       last_name: String
       email: String
       company: String
-      dev_experience: Int
-      dev_education: Int
+      dev_experience: String
+      dev_education: String
     ): User
     # adding a project
     # claiming a project/job
