@@ -20,7 +20,7 @@ linkedinRouter.get(
     res
       .status(200)
       .cookie("JWT", generateToken(user), { httpOnly: true })
-      .redirect("/home");
+      .redirect(process.env.REDIRECT_URL);
   }
 );
 
