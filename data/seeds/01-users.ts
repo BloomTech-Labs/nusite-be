@@ -22,8 +22,6 @@ export async function seed(knex: Knex): Promise<any> {
       company: "Etsy",
       password: `${await hash("testing11")}`,
       email: "BettyW@gmail.com",
-      dev_experience: 5,
-      dev_education: 8,
     },
     {
       username: "AdlerDesigns",
@@ -40,8 +38,6 @@ export async function seed(knex: Knex): Promise<any> {
       company: "Chase",
       password: `${await hash("testing11")}`,
       email: "Leslie@gmail.com",
-      dev_experience: 4,
-      dev_education: 7,
     },
     {
       username: "Potter2001",
@@ -50,8 +46,6 @@ export async function seed(knex: Knex): Promise<any> {
       company: "FaceBook",
       password: `${await hash("testing11")}`,
       email: "HarryPotter@gmail.com",
-      dev_experience: 9,
-      dev_education: 10,
     },
   ]);
 }
