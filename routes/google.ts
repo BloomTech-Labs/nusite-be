@@ -26,7 +26,7 @@ gRouter.get(
     };
     res
       .status(200)
-      .cookie("JWT", generateToken(user), { httpOnly: false })
+      .cookie("JWT", generateToken(user))
       .redirect(process.env.REDIRECT_URL);
   }
 );
