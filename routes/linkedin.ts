@@ -17,11 +17,7 @@ linkedinRouter.get(
       username: req.user.username,
     };
 
-    console.log("Made it here", user);
-
     const token = generateToken(user);
-
-    console.log(token);
 
     res
       .status(200)
@@ -29,7 +25,7 @@ linkedinRouter.get(
         domain: process.env.COOKIE_DOMAIN,
         path: "/",
       })
-      .redirect(process.env.REDIRECT_URL);
+      .redirect(`${process.env.REDIRECT_URL}?token=${token}&query=${user.id}`);
   }
 );
 
