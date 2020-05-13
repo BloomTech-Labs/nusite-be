@@ -35,10 +35,18 @@ Node, Express, TypeScript, GraphQL, Apollo-Server
 
 With the nature of GraphQL, you will only have one endpoint, with the exception of the welcome route
 
-| Method | Endpoint   | Description                           |
-| ------ | ---------- | ------------------------------------- |
-| GET    | `/`        | all users                             | Welcome route to the API |
-| POST   | `/graphql` | graphql endpoint to test your queries |
+| Method | Endpoint                                  | Description                           |
+| ------ | ----------------------------------------- | ------------------------------------- |
+| GET    | `/`                                       | all users                             | Welcome route to the API |
+| POST   | `/graphql`                                | graphql endpoint to test your queries |
+| GET    | `/auth/google` | Google API login endpoint |
+
+| Method | Endpoint         | Description                           |
+| ------ | ---------------- | ------------------------------------- |
+| GET    | `/`              | all users                             | Welcome route to the API |
+| POST   | `/graphql`       | graphql endpoint to test your queries |
+| GET    | `/auth/linkedin` | LinkedIn login endpoint               |
+| GET    | `/auth/facebook` | Facebook login endpoint               |
 
 # Data Model
 
@@ -187,6 +195,38 @@ mutation {
       email
     }
   }
+}
+
+mutation {
+ addProject (project_name: "TestingTestsTester" project_owner:1) {
+   id
+  project_name
+  }
+}
+
+mutation updateProject{
+ updateProject (id:4 project_name: "UpdateTestsTesting!!" project_owner:2) {
+   id
+  project_name
+  project_owner {
+      id
+    }
+}
+
+    mutation {
+deleteProject(id: 1) {
+    id
+  }
+}
+
+ initiateReset(email: "test@gmail.com"){
+    token
+    message
+  }
+}
+
+mutation {
+  resetPassword(email: "test@gmail.com", password: "test")
 }
 ```
 

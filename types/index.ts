@@ -4,7 +4,9 @@ const typeDefs = gql`
   type Query {
     users: [User]!
     projects: [Project]
-    user(id: ID!): User
+    user(id: ID): User
+    username(username: String): User
+    userEmail(email: String): User
     project(id: ID!): Project
   }
 
@@ -13,12 +15,12 @@ const typeDefs = gql`
     username: String!
     first_name: String!
     last_name: String!
-    password: String!
     email: String!
     company: String
-    dev_experience: Int
-    dev_education: Int
+    dev_experience: String
+    dev_education: String
     projects: [Project]
+    googleId: String
   }
 
   type Project {
@@ -38,6 +40,11 @@ const typeDefs = gql`
     user: User
   }
 
+  type ResetPayload {
+    token: String
+    message: String
+  }
+
   type Mutation {
     signup(
       username: String!
@@ -45,8 +52,30 @@ const typeDefs = gql`
       last_name: String!
       password: String!
       email: String!
+      auth_id: ID
     ): AuthPayload
     login(email: String!, password: String!): AuthPayload
+    addProject(project_name: String, project_owner: Int): Project
+    updateProject(
+      id: ID!
+      project_name: String
+      project_owner: Int
+      project_developer: Int
+      completed: Boolean
+      marketplace: Boolean
+      showcase: Boolean
+    ): Project
+    deleteProject(id: ID!): Project
+    updateUser(
+      id: ID!
+      username: String
+      first_name: String
+      last_name: String
+      email: String
+      company: String
+      dev_experience: String
+      dev_education: String
+    ): User
     # adding a project
     # claiming a project/job
     # update a project
@@ -54,6 +83,12 @@ const typeDefs = gql`
     # potentially "delete" for developers
     # archive users
     # delete projects
+
+    # initiate should send a token, secret possibly be email?
+    initiateReset(email: String!): ResetPayload
+    # Check the token, if good save the new password
+    resetPassword(email: String!, password: String!): String
+    verifyUser(email: String!): String
   }
 `;
 
