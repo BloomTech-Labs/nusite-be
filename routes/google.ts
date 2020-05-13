@@ -1,6 +1,7 @@
 const gRouter = require("express").Router();
 import passport from "passport";
 import generateToken from "../token/generateToken";
+import { User } from "../models/Model";
 
 gRouter.get(
   "/api/auth/google",
@@ -19,11 +20,14 @@ gRouter.get(
     failureRedirect: "/login",
     session: false,
   }),
-  (req: { user: { id: number; username: string } }, res: any) => {
+  async (req: { user: { id: number; username: string } }, res: any) => {
+    const userId = await User.findBy({ username: req.user.username });
+
     let user = {
-      id: req.user.id,
+      id: userId.id,
       username: req.user.username,
     };
+
     const token = generateToken(user);
 
     res
