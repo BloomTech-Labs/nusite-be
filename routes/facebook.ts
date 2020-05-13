@@ -17,10 +17,15 @@ facebookRouter.get(
       username: req.user.displayName,
     };
 
+    const token = generateToken(user);
+
     res
       .status(200)
-      .cookie("JWT", generateToken(user))
-      .redirect(process.env.REDIRECT_URL);
+      .cookie("JWT", token, {
+        domain: process.env.COOKIE_DOMAIN,
+        path: "/",
+      })
+      .redirect(`${process.env.REDIRECT_URL}?token=${token}&query=${user.id}`);
   }
 );
 
