@@ -35,7 +35,6 @@ Node, Express, TypeScript, GraphQL, Apollo-Server
 
 With the nature of GraphQL, you will only have one endpoint, with the exception of the welcome route
 
-
 | Method | Endpoint         | Description                           |
 | ------ | ---------------- | ------------------------------------- |
 | GET    | `/`              | all users                             | Welcome route to the API |
