@@ -16,6 +16,14 @@ jobs:
         env:
           CI: true
           CC_TEST_REPORTER_ID: ${{ secrets.CodeClimateReporterId }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          GOOGLE_ID: ${{ secrets.GOOGLE_ID }}
+          GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET}}
+          LINKEDIN_ID: ${{ secrets.LINKEDIN_ID }}
+          LINKEDIN_SECRET: ${{ secrets.LINKEDIN_SECRET }}
+          FACEBOOK_ID: ${{ secrets.FACEBOOK_ID }}
+          FACEBOOK_SECRET: ${{ secrets.FACEBOOK_SECRET }}
         with:
           coverageCommand: npm run coverage
           debug: true
