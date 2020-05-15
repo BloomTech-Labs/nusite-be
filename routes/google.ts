@@ -17,7 +17,6 @@ gRouter.get(
   "/api/auth/google/redirect/",
   passport.authenticate("google", {
     passReqToCallback: true,
-    failureRedirect: "/login",
     session: false,
   }),
   async (req: { user: { id: number; username: string } }, res: any) => {

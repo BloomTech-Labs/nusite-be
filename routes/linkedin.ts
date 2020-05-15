@@ -8,7 +8,6 @@ linkedinRouter.get(
   "/api/auth/linkedin/callback",
   passport.authenticate("linkedin", {
     passReqToCallback: true,
-    failureRedirect: "/login",
     session: false,
   }),
   (req: { user: { id: number; username: string }; headers: any }, res: any) => {
