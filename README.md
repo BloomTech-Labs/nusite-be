@@ -35,18 +35,13 @@ Node, Express, TypeScript, GraphQL, Apollo-Server
 
 With the nature of GraphQL, you will only have one endpoint, with the exception of the welcome route
 
-| Method | Endpoint                                  | Description                           |
-| ------ | ----------------------------------------- | ------------------------------------- |
-| GET    | `/`                                       | all users                             | Welcome route to the API |
-| POST   | `/graphql`                                | graphql endpoint to test your queries |
-| GET    | `/auth/google` | Google API login endpoint |
-
 | Method | Endpoint         | Description                           |
 | ------ | ---------------- | ------------------------------------- |
 | GET    | `/`              | all users                             | Welcome route to the API |
 | POST   | `/graphql`       | graphql endpoint to test your queries |
 | GET    | `/auth/linkedin` | LinkedIn login endpoint               |
 | GET    | `/auth/facebook` | Facebook login endpoint               |
+| GET    | `/auth/google`   | Google API login endpoint             |
 
 # Data Model
 
@@ -234,9 +229,8 @@ mutation {
 
 ## Environment Variables
 
-_ DB_HOST - typically set to localhost for your localdb
-_ DB_NAME - name specified when creating your
-
+- DB_HOST - typically set to localhost for your localdb
+- DB_NAME - name specified when creating your
 - DB_USER - set to postgres unless otherwise specified
 - DB_PASS - set to your local db password
 - JWT_SECRET - secret key for JWT hashing
