@@ -22,20 +22,24 @@ passport.use(
         // Checks for the user by the linkedin profile id
         const findUser = await User.findBy({ auth_id: profile.id });
 
-        // if no user is found attempt to create a new user
-        if (!findUser) {
-          const pw = await hash(profile.displayName, 12);
+        // IF a user exists with the same email, return that user
+        // means user signed up with different service
+        const checkUser = await User.findBy({
+          email: profile.emails[0].value,
+        });
 
-          // IF a user exists with the same email, return that user
-          // means user signed up with different service
-          const checkUser = await User.findBy({
-            email: profile.emails[0].value,
+        // Return the user
+        if (checkUser) {
+          let updateProvider = await User.update(checkUser.id, {
+            provider: profile.provider,
+            auth_id: profile.id,
           });
+          return done(null, updateProvider);
+        }
 
-          // Return the user
-          if (checkUser) {
-            return done(null, checkUser);
-          }
+        // if no user is found attempt to create a new user
+        if (!findUser && !checkUser) {
+          const pw = await hash(profile.displayName, 12);
 
           // if no email for the user exists, create a new db entry
           const newUser = {
@@ -52,14 +56,6 @@ passport.use(
 
           return done(null, user);
         } else {
-          // Potential fix for previous users that have
-          // already signed up on master without these fields
-          if (findUser.provider !== profile.provider) {
-            await User.update(findUser.id, {
-              provider: profile.provider,
-              auth_id: profile.id,
-            });
-          }
           return done(null, findUser);
         }
       });
