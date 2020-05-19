@@ -18,10 +18,18 @@ passport.use(
         // represent the logged-in user. In a typical application, you would want
         // to associate the LinkedIn account with a user record in your database,
         // and return that user instead.
-        const findUser = await User.findBy({ email: profile.emails[0].value });
+        const findUser = await User.findBy({ auth_id: profile.id });
 
         if (!findUser) {
           const pw = await hash(profile.displayName, 12);
+
+          const checkUser = await User.findBy({
+            email: profile.emails[0].value,
+          });
+
+          if (checkUser) {
+            return done(null, checkUser);
+          }
 
           const newUser = {
             username: profile.displayName,
@@ -29,12 +37,20 @@ passport.use(
             last_name: profile.name.familyName,
             email: profile.emails[0].value,
             password: pw,
+            provider: profile.provider,
+            auth_id: profile.id,
           };
 
           const [{ password, ...user }]: any = await User.add(newUser);
 
           return done(null, user);
         } else {
+          if (findUser.provider !== profile.provider) {
+            await User.update(findUser.id, {
+              provider: profile.provider,
+              auth_id: profile.id,
+            });
+          }
           return done(null, findUser);
         }
       });
