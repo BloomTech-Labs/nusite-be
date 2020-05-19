@@ -30,18 +30,15 @@ passport.use(
 
         // Return the user
         if (checkUser) {
-          let updateProvider = await User.update(checkUser.id, {
-            provider: profile.provider,
-            auth_id: profile.id,
-          });
-          return done(null, updateProvider);
+          return done(null, checkUser);
         }
 
-        // if no user is found attempt to create a new user
+        // if no user is found by auth_id or email attempt to create a new user
         if (!findUser && !checkUser) {
           const pw = await hash(profile.displayName, 12);
 
           // if no email for the user exists, create a new db entry
+          // with fields from the users profile
           const newUser = {
             username: profile.displayName,
             first_name: profile.name.givenName,
