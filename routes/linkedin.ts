@@ -2,15 +2,21 @@ const linkedinRouter = require("express").Router();
 import passport from "passport";
 import generateToken from "../token/generateToken";
 
-linkedinRouter.get("/api/auth/linkedin", passport.authenticate("linkedin"));
+linkedinRouter.get(
+  "/api/auth/linkedin",
+  passport.authenticate("linkedin", {
+    failureRedirect: `${process.env.REDIRECT_URL}/login`,
+  })
+);
 
 linkedinRouter.get(
   "/api/auth/linkedin/callback",
   passport.authenticate("linkedin", {
+    failureRedirect: `${process.env.REDIRECT_URL}/login`,
     passReqToCallback: true,
     session: false,
   }),
-  (req: { user: { id: number; username: string }; headers: any }, res: any) => {
+  (req: { user: { id: number; username: string } }, res: any) => {
     let user = {
       id: req.user.id,
       username: req.user.username,
