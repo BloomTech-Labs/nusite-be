@@ -16,7 +16,7 @@ linkedinRouter.get(
     passReqToCallback: true,
     session: false,
   }),
-  (req: { user: { id: number; username: string }; headers: any }, res: any) => {
+  (req: { user: { id: number; username: string } }, res: any) => {
     let user = {
       id: req.user.id,
       username: req.user.username,
