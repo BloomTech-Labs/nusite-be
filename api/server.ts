@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import { buildContext } from "graphql-passport";
 import passport from "passport";
@@ -16,6 +17,9 @@ const facebook = require("../routes/facebook");
 const uploader = require("../uploads/upload");
 
 const app = express();
+app.use(
+  cors({ origin: process.env.REDIRECT_DOMAIN || "*", credentials: true })
+);
 
 app.use(passport.initialize());
 
