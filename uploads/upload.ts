@@ -1,5 +1,6 @@
 const upload = require("express").Router();
-import { Project } from "../models/Model";
+import { User } from "../models/Model";
+// import { Project } from "../models/Model";
 
 // MULTER
 import multer from "multer";
@@ -25,7 +26,7 @@ const storage = multer.diskStorage({
 upload.put("/upload/:id", (req: any, res: any, next: any) => {
   const upload = multer({ storage }).single("picture");
   upload(req, res, function(err: any) {
-    const { id, project_avatar } = req.params;
+    const { id, user_avatar } = req.params;
     if (err) {
       return res.send(err);
     }
@@ -51,9 +52,9 @@ upload.put("/upload/:id", (req: any, res: any, next: any) => {
         if (err) {
           return res.send(err);
         } else {
-          Project.findById(id).then(project => {
-            if (project) {
-              Project.update(id, { project_avatar: image.secure_url }).then(
+          User.findById(id).then(user => {
+            if (user) {
+              User.update(id, { user_avatar: image.secure_url }).then(
                 update => {
                   console.log(update);
                   return update;

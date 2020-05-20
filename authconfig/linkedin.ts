@@ -11,27 +11,48 @@ passport.use(
       callbackURL: process.env.LINKEDIN_CALLBACK_URL,
       scope: ["r_emailaddress", "r_liteprofile"],
     },
-    (_accessToken: string, _refreshToken: string, profile: any, done: any) => {
+    (
+      _accessToken: string,
+      _refreshToken: string,
+      profile: ProfileValues,
+      done: any
+    ) => {
       // asynchronous verification, for effect...
       process.nextTick(async function() {
-        // To keep the example simple, the user's LinkedIn profile is returned to
-        // represent the logged-in user. In a typical application, you would want
-        // to associate the LinkedIn account with a user record in your database,
+        // associate the LinkedIn account with a user record in your database,
         // and return that user instead.
-        const findUser = await User.findBy({ email: profile.emails[0].value });
 
-        if (!findUser) {
+        // Checks for the user by the linkedin profile id
+        const findUser = await User.findBy({ auth_id: profile.id });
+
+        // IF a user exists with the same email, return that user
+        // means user signed up with different service
+        const checkUser = await User.findBy({
+          email: profile.emails[0].value,
+        });
+
+        // Return the user
+        if (checkUser) {
+          return done(null, checkUser);
+        }
+
+        // if no user is found by auth_id or email attempt to create a new user
+        if (!findUser && !checkUser) {
           const pw = await hash(profile.displayName, 12);
 
+          // if no email for the user exists, create a new db entry
+          // with fields from the users profile
           const newUser = {
             username: profile.displayName,
             first_name: profile.name.givenName,
             last_name: profile.name.familyName,
             email: profile.emails[0].value,
             password: pw,
+            provider: profile.provider,
+            auth_id: profile.id,
           };
 
-          const [{ password, ...user }]: any = await User.add(newUser);
+          const [{ password, ...user }] = await User.add(newUser);
 
           return done(null, user);
         } else {
@@ -41,3 +62,14 @@ passport.use(
     }
   )
 );
+
+interface ProfileValues {
+  displayName: string;
+  name: {
+    givenName: string;
+    familyName: string;
+  };
+  emails: [{ value: string }];
+  provider: string;
+  id: string;
+}

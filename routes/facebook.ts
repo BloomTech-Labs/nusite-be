@@ -8,7 +8,6 @@ facebookRouter.get(
   "/api/auth/facebook/callback",
   passport.authenticate("facebook", {
     passReqToCallback: true,
-    failureRedirect: "/login",
     session: false,
   }),
   (req: { user: { id: number; displayName: string } }, res: any) => {

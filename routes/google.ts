@@ -4,7 +4,7 @@ import generateToken from "../token/generateToken";
 import { User } from "../models/Model";
 
 gRouter.get(
-  "/api/auth/google",
+  "/api/auth/google/",
   passport.authenticate("google", {
     scope: [
       "https://www.googleapis.com/auth/userinfo.email",
@@ -17,7 +17,6 @@ gRouter.get(
   "/api/auth/google/redirect/",
   passport.authenticate("google", {
     passReqToCallback: true,
-    failureRedirect: "/login",
     session: false,
   }),
   async (req: { user: { id: number; username: string } }, res: any) => {
