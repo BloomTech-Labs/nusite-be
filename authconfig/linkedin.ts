@@ -11,12 +11,15 @@ passport.use(
       callbackURL: process.env.LINKEDIN_CALLBACK_URL,
       scope: ["r_emailaddress", "r_liteprofile"],
     },
-    (_accessToken: string, _refreshToken: string, profile: any, done: any) => {
+    (
+      _accessToken: string,
+      _refreshToken: string,
+      profile: ProfileValues,
+      done: any
+    ) => {
       // asynchronous verification, for effect...
       process.nextTick(async function() {
-        // To keep the example simple, the user's LinkedIn profile is returned to
-        // represent the logged-in user. In a typical application, you would want
-        // to associate the LinkedIn account with a user record in your database,
+        // associate the LinkedIn account with a user record in your database,
         // and return that user instead.
 
         // Checks for the user by the linkedin profile id
@@ -49,7 +52,7 @@ passport.use(
             auth_id: profile.id,
           };
 
-          const [{ password, ...user }]: any = await User.add(newUser);
+          const [{ password, ...user }] = await User.add(newUser);
 
           return done(null, user);
         } else {
@@ -59,3 +62,14 @@ passport.use(
     }
   )
 );
+
+interface ProfileValues {
+  displayName: string;
+  name: {
+    givenName: string;
+    familyName: string;
+  };
+  emails: [{ value: string }];
+  provider: string;
+  id: string;
+}
