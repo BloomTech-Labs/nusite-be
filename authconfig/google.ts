@@ -11,11 +11,12 @@ passport.use(
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
     (
-      _accessToken: any,
-      _refreshToken: any,
+      _accessToken: string,
+      _refreshToken: string,
       profile: { id: any; displayName: any; name: any; emails: any },
       done: any
     ) => {
+      console.log(profile);
       User.findUserById(profile.id).then((res: any) => {
         if (res) {
           return done(null, res);
