@@ -30,6 +30,7 @@ passport.use(
           last_name: "Please Update",
           email: `${profile.displayName}@fillerEmail.com`,
           password: pw,
+          provider: profile.provider,
           auth_id: profile.id,
         };
 
