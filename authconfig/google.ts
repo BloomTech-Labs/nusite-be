@@ -13,10 +13,9 @@ passport.use(
     (
       _accessToken: string,
       _refreshToken: string,
-      profile: { id: any; displayName: any; name: any; emails: any },
+      profile: googleProfile,
       done: any
     ) => {
-      console.log(profile);
       User.findUserById(profile.id).then((res: any) => {
         if (res) {
           return done(null, res);
@@ -40,5 +39,15 @@ passport.use(
     }
   )
 );
+
+interface googleProfile {
+  displayName: string;
+  name: {
+    givenName: string;
+    familyName: string;
+  };
+  emails: [{ value: string }];
+  id: string;
+};
 
 module.exports = passport;
