@@ -26,7 +26,7 @@ passport.use(
 
           if (checkUser) {
             return done(null, checkUser);
-          };
+          }
           const pw = hashSync(profile.displayName, 12);
 
           const user = {
@@ -55,6 +55,6 @@ interface googleProfile {
   };
   emails: [{ value: string }];
   id: string;
-};
+}
 
 module.exports = passport;
