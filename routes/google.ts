@@ -1,9 +1,9 @@
-const gRouter = require("express").Router();
+const googleRouter = require("express").Router();
 import passport from "passport";
 import generateToken from "../token/generateToken";
 import { User } from "../models/Model";
 
-gRouter.get(
+googleRouter.get(
   "/api/auth/google/",
   passport.authenticate("google", {
     scope: [
@@ -13,7 +13,7 @@ gRouter.get(
   })
 );
 
-gRouter.get(
+googleRouter.get(
   "/api/auth/google/redirect/",
   passport.authenticate("google", {
     passReqToCallback: true,
@@ -39,4 +39,4 @@ gRouter.get(
   }
 );
 
-module.exports = gRouter;
+module.exports = googleRouter;
