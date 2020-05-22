@@ -20,6 +20,13 @@ passport.use(
         if (res) {
           return done(null, res);
         } else {
+          const checkUser = User.findBy({
+            email: profile.emails[0].value,
+          });
+
+          if (checkUser) {
+            return done(null, checkUser);
+          };
           const pw = hashSync(profile.displayName, 12);
 
           const user = {
